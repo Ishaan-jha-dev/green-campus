@@ -89,7 +89,7 @@ export default function EnergyRadarPage() {
         
         <div className="flex-1 flex items-center justify-center">
           <div 
-            className={\`dropzone \${dragActive ? 'active' : ''}\`}
+            className={`dropzone ${dragActive ? 'active' : ''}`}
             onDragEnter={handleDrag}
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
