@@ -4,466 +4,227 @@ import Link from 'next/link';
 
 export default function DashboardPage() {
   return (
-    <div className="dashboard-content p-6">
-      <div className="dashboard-header mb-6">
-        <h1 className="text-display-xl text-ink">Dashboard</h1>
-        <p className="text-body-md text-slate-700">Welcome back, Nakul. Your campus is performing well.</p>
-      </div>
-
-      {/* TOP SUMMARY STRIP */}
-      <div className="summary-strip mb-8">
-        <div className="gauge-container">
-          <div className="gauge">
-            <svg viewBox="0 0 100 50" className="gauge-svg">
-              <path d="M 10,50 A 40,40 0 0,1 90,50" fill="none" strokeWidth="8" stroke="#E5E7EB" strokeLinecap="round" />
-              <path d="M 10,50 A 40,40 0 0,1 70,15" fill="none" strokeWidth="8" stroke="url(#emerald-gradient)" strokeLinecap="round" />
-              <defs>
-                <linearGradient id="emerald-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#059669" />
-                  <stop offset="100%" stopColor="#D97706" />
-                </linearGradient>
-              </defs>
+    <>
+      {/* Top Summary Strip */}
+      <header className="bg-emerald-800 text-white p-6 shadow-lg relative overflow-hidden">
+        <div className="absolute right-0 top-0 w-1/3 h-full opacity-10 pointer-events-none">
+          <svg className="h-full w-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M44.7,-76.4C58.1,-69.2,69.2,-58.1,76.4,-44.7C83.7,-31.3,87.1,-15.7,87.1,0C87.1,15.7,83.7,31.3,76.4,44.7C69.2,58.1,58.1,69.2,44.7,76.4C31.3,83.7,15.7,87.1,0,87.1C-15.7,87.1,-31.3,83.7,-44.7,76.4C-58.1,69.2,-69.2,58.1,-76.4,44.7C-83.7,31.3,-87.1,15.7,-87.1,0C-87.1,-15.7,-83.7,-31.3,-76.4,-44.7C-69.2,-58.1,-58.1,-69.2,-44.7,-76.4C-31.3,-83.7,-15.7,-87.1,0,-87.1C15.7,-87.1,31.3,-83.7,44.7,-76.4Z" fill="#FFFFFF" transform="translate(100 100)"></path>
+          </svg>
+        </div>
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-8 relative z-10 p-0 m-0">
+          {/* Circular Score Gauge */}
+          <div className="relative flex items-center justify-center w-32 h-32 flex-shrink-0">
+            <svg className="w-full h-full transform -rotate-90">
+              <circle className="text-white/10" cx="64" cy="64" fill="transparent" r="58" stroke="rgba(255,255,255,0.1)" strokeWidth="8"></circle>
+              <circle cx="64" cy="64" fill="transparent" r="58" stroke="#85f8c4" strokeDasharray="364.4" strokeDashoffset="72.8" strokeLinecap="round" strokeWidth="8"></circle>
             </svg>
-            <div className="gauge-value">
-              <span className="text-display-lg text-white font-mono">B+</span>
-              <span className="text-label text-mint mt-1">PERFORMER</span>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-3xl font-black leading-none">B+</span>
+              <span className="text-[10px] font-mono uppercase tracking-widest mt-1 opacity-80">Performer</span>
+            </div>
+          </div>
+          {/* Stat Blocks */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 flex-1 w-full">
+            <div>
+              <p className="text-xs uppercase tracking-widest font-bold text-emerald-200 mb-1">CO2e Footprint</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-mono">12.4</span>
+                <span className="text-sm opacity-70">tCO2e</span>
+              </div>
+              <p className="text-[10px] mt-1 text-emerald-300 font-mono">↓ 4.2% VS LY</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-widest font-bold text-emerald-200 mb-1">Waste Managed</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-mono">847</span>
+                <span className="text-sm opacity-70">units</span>
+              </div>
+              <p className="text-[10px] mt-1 text-emerald-300 font-mono">92% RECYCLED</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-widest font-bold text-emerald-200 mb-1">Anomalies</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-mono text-white">3</span>
+                <span className="text-sm opacity-70">active</span>
+              </div>
+              <p className="text-[10px] mt-1 text-amber-300 font-mono">CRITICAL ATTN</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-widest font-bold text-emerald-200 mb-1">EPR Compliance</p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-mono">78</span>
+                <span className="text-sm opacity-70">%</span>
+              </div>
+              <p className="text-[10px] mt-1 text-emerald-300 font-mono">+12 PTS GAIN</p>
             </div>
           </div>
         </div>
-        
-        <div className="stat-blocks">
-          <div className="stat-block">
-            <span className="text-label text-mint">CO2E FOOTPRINT</span>
-            <div className="stat-value text-white font-mono text-display-lg">12.4<span className="text-body-md ml-1">t</span></div>
-            <span className="badge badge-down">↓ 4.2%</span>
+      </header>
+      
+      {/* Module Panels Grid */}
+      <section className="max-w-7xl mx-auto px-6 py-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* CarbonLens (Emerald Border) */}
+          <div className="bg-white rounded-xl border-l-4 border-emerald-500 overflow-hidden shadow-sm transition-colors hover:bg-slate-50 group flex flex-col">
+            <div className="p-6 flex-1">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">CarbonLens</h3>
+                  <p className="text-xs text-slate-600">Real-time emission monitoring</p>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400 uppercase">Updated 2m ago</span>
+              </div>
+              <div className="h-32 w-full mt-6 flex items-end gap-1 overflow-hidden">
+                <div className="flex-1 bg-emerald-100/50 rounded-t h-1/2"></div>
+                <div className="flex-1 bg-emerald-100/50 rounded-t h-2/3"></div>
+                <div className="flex-1 bg-emerald-200/50 rounded-t h-3/4"></div>
+                <div className="flex-1 bg-emerald-300/50 rounded-t h-1/2"></div>
+                <div className="flex-1 bg-emerald-400/50 rounded-t h-5/6"></div>
+                <div className="flex-1 bg-emerald-500/50 rounded-t h-full"></div>
+                <div className="flex-1 bg-emerald-600/50 rounded-t h-4/5"></div>
+              </div>
+              <div className="flex justify-between mt-4">
+                <div className="font-mono text-xs text-slate-500">08:00</div>
+                <div className="font-mono text-xs text-slate-500">12:00</div>
+                <div className="font-mono text-xs text-slate-500">16:00</div>
+              </div>
+            </div>
+            <Link href="/dashboard/carbon" className="bg-slate-50 px-6 py-3 flex items-center justify-between border-t border-slate-100">
+              <span className="text-xs font-bold text-emerald-700 group-hover:underline cursor-pointer">View Emissions Detail</span>
+              <span className="material-symbols-outlined text-emerald-700 text-sm">chevron_right</span>
+            </Link>
           </div>
-          <div className="stat-block">
-            <span className="text-label text-mint">WASTE MANAGED</span>
-            <div className="stat-value text-white font-mono text-display-lg">847</div>
-            <span className="text-caption text-mint">92% Recycled</span>
+
+          {/* WasteAI (Violet Border) */}
+          <div className="bg-white rounded-xl border-l-4 border-violet-600 overflow-hidden shadow-sm transition-colors hover:bg-slate-50 group flex flex-col">
+            <div className="p-6 flex-1">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">WasteAI</h3>
+                  <p className="text-xs text-slate-600">Smart sorting & lifecycle ledger</p>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400 uppercase">Updated 14m ago</span>
+              </div>
+              <div className="flex items-center gap-8 mt-6">
+                <div className="relative w-24 h-24 flex-shrink-0">
+                  <svg className="w-full h-full">
+                    <circle cx="48" cy="48" fill="transparent" r="40" stroke="#f1f5f9" strokeWidth="8"></circle>
+                    <circle cx="48" cy="48" fill="transparent" r="40" stroke="#7C3AED" strokeDasharray="251.2" strokeDashoffset="62.8" strokeWidth="8"></circle>
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center text-xs font-mono font-bold">75%</div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-violet-600"></span>
+                    <span className="text-xs text-slate-600">Recyclable</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-slate-200"></span>
+                    <span className="text-xs text-slate-600">Landfill</span>
+                  </div>
+                  <p className="text-sm font-mono font-bold mt-2">635 kg <span className="text-[10px] text-slate-400 font-normal">TODAY</span></p>
+                </div>
+              </div>
+            </div>
+            <Link href="/dashboard/waste" className="bg-slate-50 px-6 py-3 flex items-center justify-between border-t border-slate-100">
+              <span className="text-xs font-bold text-violet-700 group-hover:underline cursor-pointer">Audit Waste Stream</span>
+              <span className="material-symbols-outlined text-violet-700 text-sm">chevron_right</span>
+            </Link>
           </div>
-          <div className="stat-block">
-            <span className="text-label text-mint">ANOMALIES</span>
-            <div className="stat-value text-white font-mono text-display-lg">3</div>
-            <span className="text-caption text-rose">Requires Action</span>
-          </div>
-          <div className="stat-block">
-            <span className="text-label text-mint">EPR COMPLIANCE</span>
-            <div className="stat-value text-white font-mono text-display-lg">78%</div>
-            <span className="text-caption text-mint">+12 Pts</span>
+
+          {/* EnergyRadar (Amber Border) */}
+          <div className="bg-white rounded-xl border-l-4 border-amber-500 overflow-hidden shadow-sm transition-colors hover:bg-slate-50 group flex flex-col">
+            <div className="p-6 flex-1">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">EnergyRadar</h3>
+                  <p className="text-xs text-slate-600">Power & Thermal network</p>
+                </div>
+                <span className="text-[10px] font-mono text-slate-400 uppercase">Live Feed</span>
+              </div>
+              <div className="grid grid-cols-6 gap-1 mt-6">
+                <div className="h-6 bg-amber-100 rounded-sm"></div>
+                <div className="h-6 bg-amber-200 rounded-sm"></div>
+                <div className="h-6 bg-amber-100 rounded-sm"></div>
+                <div className="h-6 bg-amber-400 rounded-sm"></div>
+                <div className="h-6 bg-amber-200 rounded-sm"></div>
+                <div className="h-6 bg-red-500 animate-pulse rounded-sm" title="Critical Anomaly"></div>
+                <div className="h-6 bg-amber-300 rounded-sm"></div>
+                <div className="h-6 bg-amber-500 rounded-sm"></div>
+                <div className="h-6 bg-amber-400 rounded-sm"></div>
+                <div className="h-6 bg-amber-200 rounded-sm"></div>
+                <div className="h-6 bg-amber-100 rounded-sm"></div>
+                <div className="h-6 bg-amber-100 rounded-sm"></div>
+              </div>
+              <div className="mt-4 p-3 bg-red-50 rounded flex items-center gap-3">
+                <span className="material-symbols-outlined text-red-600 text-sm">warning</span>
+                <span className="text-[10px] font-mono text-red-700 leading-tight">CRITICAL: Transformer B-12 Overheating in Data Center</span>
+              </div>
+            </div>
+            <Link href="/dashboard/energy" className="bg-slate-50 px-6 py-3 flex items-center justify-between border-t border-slate-100">
+              <span className="text-xs font-bold text-amber-700 group-hover:underline cursor-pointer">Resolve Alerts</span>
+              <span className="material-symbols-outlined text-amber-700 text-sm">chevron_right</span>
+            </Link>
           </div>
         </div>
-      </div>
-
-      {/* MODULE PANELS */}
-      <div className="module-panels mb-8">
-        {/* CarbonLens */}
-        <div className="module-panel carbon">
-          <div className="panel-header">
-            <div className="flex items-center gap-2">
-              <div className="panel-dot bg-emerald"></div>
-              <h3 className="text-heading-sm">CarbonLens</h3>
-            </div>
-            <span className="text-caption text-mist">Updated 2m ago</span>
+      </section>
+      
+      {/* Activity Feed */}
+      <section className="max-w-7xl mx-auto px-6 w-full pb-10">
+        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          <div className="p-6 border-b border-slate-100">
+            <h3 className="text-lg font-bold text-slate-900">Campus Activity Ledger</h3>
+            <p className="text-xs text-slate-500">Immutable record of environmental events</p>
           </div>
-          <p className="text-body-sm text-slate-700 mb-4">Real-time emission monitoring</p>
-          
-          <div className="mini-chart mb-4 bg-emerald-50 rounded-md p-2 flex items-end gap-1 h-24 overflow-hidden">
-             <div className="bg-emerald-300 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '60%', backgroundColor: '#6EE7B7'}}></div>
-             <div className="bg-emerald-400 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '80%', backgroundColor: '#34D399'}}></div>
-             <div className="bg-emerald-400 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '70%', backgroundColor: '#34D399'}}></div>
-             <div className="bg-emerald-300 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '50%', backgroundColor: '#6EE7B7'}}></div>
-             <div className="bg-emerald-500 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '90%', backgroundColor: '#10B981'}}></div>
-             <div className="bg-emerald-500 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '76%', backgroundColor: '#10B981'}}></div>
-          </div>
-          
-          <Link href="/dashboard/carbon" className="text-emerald text-body-sm font-semibold flex items-center justify-between mt-auto">
-            View Emissions Detail <span className="material-symbols-outlined text-sm">arrow_forward</span>
-          </Link>
-        </div>
-
-        {/* WasteAI */}
-        <div className="module-panel waste">
-          <div className="panel-header">
-            <div className="flex items-center gap-2">
-              <div className="panel-dot bg-violet"></div>
-              <h3 className="text-heading-sm">WasteAI</h3>
+          <div className="divide-y divide-slate-100">
+            <div className="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                <span className="material-symbols-outlined text-emerald-600 text-xl">eco</span>
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium">Carbon Offset Threshold Reached</p>
+                <p className="text-[10px] text-slate-400 font-mono uppercase">CarbonLens • Central Block</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-mono">09:42</p>
+                <p className="text-[10px] text-emerald-600 font-bold">+0.4 tCO2e</p>
+              </div>
             </div>
-            <span className="text-caption text-mist">Updated 14m ago</span>
-          </div>
-          <p className="text-body-sm text-slate-700 mb-4">Smart sorting & lifecycle ledger</p>
-          
-          <div className="flex items-center gap-4 mb-4">
-            <div className="donut-chart">
-              <svg viewBox="0 0 36 36" className="circular-chart violet">
-                <path className="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                <path className="circle" strokeDasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-              </svg>
-              <div className="donut-text font-mono">75%</div>
+            
+            <div className="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-violet-50 flex items-center justify-center flex-shrink-0">
+                <span className="material-symbols-outlined text-violet-600 text-xl">auto_delete</span>
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium">Batch 402 EPR Documentation Certified</p>
+                <p className="text-[10px] text-slate-400 font-mono uppercase">WasteAI • Logistics Hub</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-mono">08:15</p>
+                <p className="text-[10px] text-violet-600 font-bold">CERTIFIED</p>
+              </div>
             </div>
-            <div className="donut-legend">
-              <div className="legend-item"><span className="legend-dot bg-violet"></span> Recyclable</div>
-              <div className="legend-item"><span className="legend-dot bg-mist"></span> Landfill</div>
-              <div className="text-data-md mt-2 font-mono">635 kg <span className="text-caption text-mist font-sans">TODAY</span></div>
+            
+            <div className="px-6 py-4 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0">
+                <span className="material-symbols-outlined text-amber-600 text-xl">electric_bolt</span>
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium">Peak Load Threshold Warning</p>
+                <p className="text-[10px] text-slate-400 font-mono uppercase">EnergyRadar • South Wing</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-mono">07:55</p>
+                <p className="text-[10px] text-amber-600 font-bold">114% CAP</p>
+              </div>
             </div>
           </div>
-          
-          <Link href="/dashboard/waste" className="text-violet text-body-sm font-semibold flex items-center justify-between mt-auto">
-            Audit Waste Stream <span className="material-symbols-outlined text-sm">arrow_forward</span>
-          </Link>
-        </div>
-
-        {/* EnergyRadar */}
-        <div className="module-panel energy">
-          <div className="panel-header">
-            <div className="flex items-center gap-2">
-              <div className="panel-dot bg-amber"></div>
-              <h3 className="text-heading-sm">EnergyRadar</h3>
-            </div>
-            <span className="text-caption text-mist">Live Feed</span>
-          </div>
-          <p className="text-body-sm text-slate-700 mb-4">Power & Thermal network</p>
-          
-          <div className="heatmap-mock mb-4">
-            <div className="heatmap-row">
-              <div className="heat-cell bg-amber-light"></div>
-              <div className="heat-cell bg-amber-light"></div>
-              <div className="heat-cell bg-amber"></div>
-              <div className="heat-cell bg-amber"></div>
-              <div className="heat-cell bg-rose-light"></div>
-            </div>
-            <div className="heatmap-row">
-              <div className="heat-cell bg-amber"></div>
-              <div className="heat-cell bg-amber font-bold text-white">!</div>
-              <div className="heat-cell bg-amber"></div>
-              <div className="heat-cell bg-amber-light"></div>
-              <div className="heat-cell bg-white border"></div>
-            </div>
-          </div>
-
-          <div className="alert-message mt-auto mb-4 bg-rose-100 text-rose p-3 text-xs rounded-md flex items-center gap-2 border border-rose border-opacity-20 font-bold">
-            <span className="material-symbols-outlined" style={{fontSize: '16px'}}>warning</span>
-            CRITICAL: Transformer B-12 Overheating
-          </div>
-          
-          <Link href="/dashboard/energy" className="text-amber text-body-sm font-semibold flex items-center justify-between mt-auto">
-            Resolve Alerts <span className="material-symbols-outlined text-sm">arrow_forward</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* RECENT ACTIVITY */}
-      <div className="activity-feed bg-white p-6 rounded-lg shadow-sm">
-        <h3 className="text-heading-sm mb-4">Campus Activity Ledger</h3>
-        <p className="text-body-sm text-mist mb-6">Immutable record of environmental events</p>
-        
-        <div className="timeline">
-          <div className="timeline-item">
-            <div className="timeline-icon bg-emerald-100 text-emerald">
-              <span className="material-symbols-outlined text-sm">energy_savings_leaf</span>
-            </div>
-            <div className="timeline-content">
-              <p className="text-body-md font-medium">Carbon Offset Threshold Reached</p>
-              <p className="text-caption text-mist uppercase font-mono">CarbonLens • Central Block</p>
-            </div>
-            <div className="timeline-meta">
-              <p className="text-body-sm font-mono text-ink">09:42</p>
-              <p className="text-caption text-emerald">+0.4 tCO2e</p>
-            </div>
-          </div>
-          
-          <div className="timeline-item">
-            <div className="timeline-icon bg-violet-light text-violet">
-              <span className="material-symbols-outlined text-sm">recycling</span>
-            </div>
-            <div className="timeline-content">
-              <p className="text-body-md font-medium">Batch 402 EPR Documentation Certified</p>
-              <p className="text-caption text-mist uppercase font-mono">WasteAI • Logistics Hub</p>
-            </div>
-            <div className="timeline-meta">
-              <p className="text-body-sm font-mono text-ink">08:15</p>
-              <p className="text-caption text-violet">CERTIFIED</p>
-            </div>
-          </div>
-          
-          <div className="timeline-item border-none">
-            <div className="timeline-icon bg-amber-light text-amber">
-              <span className="material-symbols-outlined text-sm">bolt</span>
-            </div>
-            <div className="timeline-content">
-              <p className="text-body-md font-medium">Peak Load Threshold Warning</p>
-              <p className="text-caption text-mist uppercase font-mono">EnergyRadar • South Wing</p>
-            </div>
-            <div className="timeline-meta">
-              <p className="text-body-sm font-mono text-ink">07:55</p>
-              <p className="text-caption text-amber">114% CAP</p>
-            </div>
+          <div className="p-4 text-center border-t border-slate-100">
+            <button className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-800 transition-colors">View Full Ledger</button>
           </div>
         </div>
-        
-        <button className="btn-ghost w-full mt-4 text-center text-label">VIEW FULL LEDGER</button>
-      </div>
-
-      <style jsx>{`
-        .p-6 { padding: var(--space-6); }
-        .mb-4 { margin-bottom: var(--space-4); }
-        .mb-6 { margin-bottom: var(--space-6); }
-        .mb-8 { margin-bottom: var(--space-8); }
-        .mt-1 { margin-top: var(--space-1); }
-        .mt-2 { margin-top: var(--space-2); }
-        .mt-4 { margin-top: var(--space-4); }
-        .mt-auto { margin-top: auto; }
-        .ml-1 { margin-left: var(--space-1); }
-        
-        .summary-strip {
-          background-color: var(--color-emerald-800);
-          border-radius: var(--radius-lg);
-          padding: var(--space-6);
-          display: flex;
-          flex-direction: column;
-          gap: var(--space-6);
-        }
-        
-        @media (min-width: 1024px) {
-          .summary-strip {
-            flex-direction: row;
-            align-items: stretch;
-          }
-        }
-        
-        .gauge-container {
-          flex: 0 0 220px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        
-        .gauge {
-          position: relative;
-          width: 180px;
-          height: 90px;
-        }
-        
-        .gauge-svg {
-          width: 100%;
-          height: 100%;
-        }
-        
-        .gauge-value {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        
-        .stat-blocks {
-          flex: 1;
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: var(--space-4);
-          padding-left: var(--space-6);
-        }
-        
-        @media (min-width: 768px) {
-          .stat-blocks {
-            grid-template-columns: repeat(4, 1fr);
-            border-left: 1px solid rgba(255,255,255,0.1);
-          }
-        }
-        
-        .stat-block {
-          display: flex;
-          flex-direction: column;
-        }
-        
-        .module-panels {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: var(--space-6);
-        }
-        
-        @media (min-width: 1024px) {
-          .module-panels {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-        
-        .module-panel {
-          background-color: var(--color-white);
-          border-radius: var(--radius-md);
-          padding: var(--space-6);
-          display: flex;
-          flex-direction: column;
-          box-shadow: var(--shadow-sm);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .module-panel:hover {
-          transform: translateY(-4px);
-          box-shadow: var(--shadow-md);
-        }
-        
-        .module-panel.carbon { border-left: 4px solid var(--color-emerald-600); }
-        .module-panel.waste { border-left: 4px solid var(--color-waste); }
-        .module-panel.energy { border-left: 4px solid var(--color-warning); }
-        
-        .panel-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: var(--space-2);
-        }
-        
-        .panel-dot {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-        }
-        
-        .bg-emerald { background-color: var(--color-emerald-600); border-color: var(--color-emerald-600); }
-        .bg-violet { background-color: var(--color-waste); border-color: var(--color-waste); }
-        .bg-amber { background-color: var(--color-warning); border-color: var(--color-warning); }
-        .bg-mist { background-color: var(--color-mist-500); }
-        
-        .bg-emerald-50 { background-color: #ECFDF5; }
-        .bg-amber-light { background-color: var(--color-amber-light); }
-        .bg-rose-light { background-color: var(--color-rose-light); }
-        .bg-violet-light { background-color: var(--color-violet-light); }
-        .bg-emerald-100 { background-color: var(--color-emerald-light); }
-        
-        .mini-chart { height: 120px; }
-        
-        .donut-chart {
-          position: relative;
-          width: 80px;
-          height: 80px;
-        }
-        
-        .circular-chart {
-          display: block;
-          margin: 0 auto;
-          max-width: 80%;
-          max-height: 250px;
-        }
-        
-        .circle-bg {
-          fill: none;
-          stroke: #F3F4F6;
-          stroke-width: 3.8;
-        }
-        
-        .circle {
-          fill: none;
-          stroke-width: 2.8;
-          stroke-linecap: round;
-        }
-        
-        .circular-chart.violet .circle {
-          stroke: var(--color-waste);
-        }
-        
-        .donut-text {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 14px;
-          font-weight: bold;
-        }
-        
-        .donut-legend {
-          flex: 1;
-        }
-        
-        .legend-item {
-          display: flex;
-          align-items: center;
-          gap: var(--space-2);
-          font-size: 12px;
-          color: var(--color-slate-700);
-          margin-bottom: 2px;
-        }
-        
-        .legend-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-        }
-        
-        .heatmap-mock {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-        }
-        
-        .heatmap-row {
-          display: flex;
-          gap: 4px;
-        }
-        
-        .heat-cell {
-          height: 24px;
-          flex: 1;
-          border-radius: 2px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 12px;
-        }
-        
-        .border { border: 1px solid #E5E7EB; }
-        
-        .timeline {
-          position: relative;
-        }
-
-        .timeline::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 15px;
-          margin-top: 16px;
-          margin-bottom: 24px;
-          width: 2px;
-          background-color: #E5E7EB;
-          z-index: 0;
-        }
-
-        .timeline-item {
-          display: flex;
-          padding: var(--space-4) 0;
-          border-bottom: 1px solid #E5E7EB;
-          gap: var(--space-4);
-          position: relative;
-          z-index: 1;
-        }
-        
-        .border-none { border-bottom: none; }
-        
-        .timeline-icon {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          background-color: var(--color-white);
-          border: 2px solid var(--color-white);
-        }
-        
-        .timeline-content {
-          flex: 1;
-        }
-        
-        .timeline-meta {
-          text-align: right;
-        }
-      `}</style>
-    </div>
+      </section>
+    </>
   );
 }
