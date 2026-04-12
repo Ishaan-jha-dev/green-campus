@@ -68,16 +68,13 @@ export default function DashboardPage() {
           </div>
           <p className="text-body-sm text-slate-700 mb-4">Real-time emission monitoring</p>
           
-          <div className="mini-chart mb-4 bg-emerald-50 rounded-md">
-            {/* Mock Chart */}
-            <svg viewBox="0 0 100 50" preserveAspectRatio="none" className="w-full h-full p-2">
-               <rect x="5" y="20" width="10" height="30" fill="#6EE7B7" rx="2" />
-               <rect x="20" y="10" width="10" height="40" fill="#6EE7B7" rx="2" />
-               <rect x="35" y="15" width="10" height="35" fill="#6EE7B7" rx="2" />
-               <rect x="50" y="25" width="10" height="25" fill="#6EE7B7" rx="2" />
-               <rect x="65" y="5" width="10" height="45" fill="#6EE7B7" rx="2" />
-               <rect x="80" y="12" width="10" height="38" fill="#6EE7B7" rx="2" />
-            </svg>
+          <div className="mini-chart mb-4 bg-emerald-50 rounded-md p-2 flex items-end gap-1 h-24 overflow-hidden">
+             <div className="bg-emerald-300 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '60%', backgroundColor: '#6EE7B7'}}></div>
+             <div className="bg-emerald-400 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '80%', backgroundColor: '#34D399'}}></div>
+             <div className="bg-emerald-400 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '70%', backgroundColor: '#34D399'}}></div>
+             <div className="bg-emerald-300 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '50%', backgroundColor: '#6EE7B7'}}></div>
+             <div className="bg-emerald-500 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '90%', backgroundColor: '#10B981'}}></div>
+             <div className="bg-emerald-500 w-full rounded-sm transition-all duration-500 hover:opacity-80" style={{height: '76%', backgroundColor: '#10B981'}}></div>
           </div>
           
           <Link href="/dashboard/carbon" className="text-emerald text-body-sm font-semibold flex items-center justify-between mt-auto">
@@ -142,10 +139,11 @@ export default function DashboardPage() {
               <div className="heat-cell bg-amber-light"></div>
               <div className="heat-cell bg-white border"></div>
             </div>
-            <div className="alert-message mt-2 bg-rose-light text-rose p-2 text-xs rounded-md flex items-center gap-1">
-              <span className="material-symbols-outlined" style={{fontSize: '14px'}}>warning</span>
-              CRITICAL: Transformer B-12 Overheating
-            </div>
+          </div>
+
+          <div className="alert-message mt-auto mb-4 bg-rose-100 text-rose p-3 text-xs rounded-md flex items-center gap-2 border border-rose border-opacity-20 font-bold">
+            <span className="material-symbols-outlined" style={{fontSize: '16px'}}>warning</span>
+            CRITICAL: Transformer B-12 Overheating
           </div>
           
           <Link href="/dashboard/energy" className="text-amber text-body-sm font-semibold flex items-center justify-between mt-auto">
@@ -300,6 +298,12 @@ export default function DashboardPage() {
           display: flex;
           flex-direction: column;
           box-shadow: var(--shadow-sm);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .module-panel:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-md);
         }
         
         .module-panel.carbon { border-left: 4px solid var(--color-emerald-600); }
@@ -412,11 +416,30 @@ export default function DashboardPage() {
         
         .border { border: 1px solid #E5E7EB; }
         
+        .timeline {
+          position: relative;
+        }
+
+        .timeline::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 15px;
+          margin-top: 16px;
+          margin-bottom: 24px;
+          width: 2px;
+          background-color: #E5E7EB;
+          z-index: 0;
+        }
+
         .timeline-item {
           display: flex;
           padding: var(--space-4) 0;
           border-bottom: 1px solid #E5E7EB;
           gap: var(--space-4);
+          position: relative;
+          z-index: 1;
         }
         
         .border-none { border-bottom: none; }
@@ -429,6 +452,8 @@ export default function DashboardPage() {
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          background-color: var(--color-white);
+          border: 2px solid var(--color-white);
         }
         
         .timeline-content {
