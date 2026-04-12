@@ -32,8 +32,10 @@ export default function DashboardLayout({ children }) {
                 href={item.path}
                 className={`nav-item ${pathname === item.path ? 'active' : ''}`}
               >
-                <span className="material-symbols-outlined">{item.icon}</span>
-                {item.label}
+                <div className="nav-icon-wrapper">
+                  <span className="material-symbols-outlined">{item.icon}</span>
+                </div>
+                <span className="nav-label">{item.label}</span>
               </Link>
             ))}
             
@@ -43,8 +45,10 @@ export default function DashboardLayout({ children }) {
               href="/dashboard/settings"
               className={`nav-item ${pathname === '/dashboard/settings' ? 'active' : ''}`}
             >
-              <span className="material-symbols-outlined">settings</span>
-              Settings
+              <div className="nav-icon-wrapper">
+                <span className="material-symbols-outlined">settings</span>
+              </div>
+              <span className="nav-label">Settings</span>
             </Link>
           </nav>
         </div>
@@ -149,23 +153,33 @@ export default function DashboardLayout({ children }) {
           display: flex;
           align-items: center;
           gap: var(--space-3);
-          height: 44px;
+          height: 48px;
           padding: 0 var(--space-3);
           border-left: 3px solid transparent;
           border-radius: 0 var(--radius-md) var(--radius-md) 0;
           color: var(--color-mist-500);
           text-decoration: none;
-          font-weight: 500;
-          font-size: 15px;
           transition: all 150ms ease;
         }
         
-        .nav-item .material-symbols-outlined {
-          font-size: 22px;
+        .nav-icon-wrapper {
           display: flex;
           align-items: center;
           justify-content: center;
           width: 24px;
+          height: 24px;
+        }
+        
+        .nav-item .material-symbols-outlined {
+          font-size: 24px;
+          line-height: 1;
+        }
+        
+        .nav-label {
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 1;
+          transform: translateY(1px); /* Optical vertical alignment fix */
         }
         
         .nav-item:hover {
