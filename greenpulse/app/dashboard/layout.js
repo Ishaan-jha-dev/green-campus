@@ -7,317 +7,91 @@ export default function DashboardLayout({ children }) {
   const pathname = usePathname();
 
   const navItems = [
-    { icon: 'home', label: 'Dashboard', path: '/dashboard' },
-    { icon: 'energy_savings_leaf', label: 'CarbonLens', path: '/dashboard/carbon' },
-    { icon: 'camera', label: 'WasteAI', path: '/dashboard/waste' },
+    { icon: 'dashboard', label: 'Dashboard', path: '/dashboard' },
+    { icon: 'visibility', label: 'CarbonLens', path: '/dashboard/carbon' },
+    { icon: 'recycling', label: 'WasteAI', path: '/dashboard/waste' },
     { icon: 'bolt', label: 'EnergyRadar', path: '/dashboard/energy' },
     { icon: 'description', label: 'Reports', path: '/dashboard/reports' },
-    { icon: 'emoji_events', label: 'Leaderboard', path: '/dashboard/leaderboard' },
+    { icon: 'leaderboard', label: 'Leaderboard', path: '/dashboard/leaderboard' },
+    { icon: 'settings', label: 'Settings', path: '/dashboard/settings' },
+  ];
+
+  const mobileNavItems = [
+    { icon: 'home', label: 'Home', path: '/dashboard' },
+    { icon: 'analytics', label: 'Carbon', path: '/dashboard/carbon' },
+    { icon: 'delete_outline', label: 'Waste', path: '/dashboard/waste' },
+    { icon: 'electric_bolt', label: 'Energy', path: '/dashboard/energy' },
   ];
 
   return (
-    <div className="dashboard-layout">
+    <div className="flex min-h-screen bg-[#f7f9ff]">
       {/* SIDEBAR (Desktop) */}
-      <aside className="sidebar">
-        <div className="sidebar-top">
-          <div className="logo-container">
-            <div className="logo-dot"></div>
-            <span className="logo-text">GreenPulse Campus</span>
-          </div>
-          
-          <nav className="sidebar-nav">
-            {navItems.map((item) => (
+      <aside className="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-[#0F1923] py-8 overflow-y-auto z-50">
+        <div className="px-6 mb-10">
+          <h1 className="text-lg font-black text-white leading-none">GreenPulse</h1>
+          <p className="text-[10px] text-slate-400 font-mono tracking-widest uppercase mt-1">Sovereign Ledger</p>
+        </div>
+        
+        <nav className="flex-1 px-3 space-y-1">
+          {navItems.map((item) => {
+            const isActive = pathname === item.path;
+            return (
               <Link 
                 key={item.path} 
                 href={item.path}
-                className={`nav-item ${pathname === item.path ? 'active' : ''}`}
+                className={`flex items-center gap-3 px-4 py-3 font-sans text-sm tracking-wide transition-all ${
+                  isActive 
+                    ? 'text-emerald-400 bg-emerald-500/10 border-l-4 border-emerald-500' 
+                    : 'text-slate-400 hover:bg-white/5 hover:text-white border-l-4 border-transparent'
+                }`}
               >
-                <div className="nav-icon-wrapper">
-                  <span className="material-symbols-outlined">{item.icon}</span>
-                </div>
-                <span className="nav-label">{item.label}</span>
+                <span className="material-symbols-outlined">{item.icon}</span>
+                <span>{item.label}</span>
               </Link>
-            ))}
-            
-            <div className="nav-divider"></div>
-            
-            <Link 
-              href="/dashboard/settings"
-              className={`nav-item ${pathname === '/dashboard/settings' ? 'active' : ''}`}
-            >
-              <div className="nav-icon-wrapper">
-                <span className="material-symbols-outlined">settings</span>
-              </div>
-              <span className="nav-label">Settings</span>
-            </Link>
-          </nav>
-        </div>
+            )
+          })}
+        </nav>
         
-        <div className="sidebar-bottom">
-          <div className="user-profile">
-            <div className="avatar">N</div>
-            <div className="user-info">
-              <span className="user-name">Nakul S.</span>
-              <span className="user-role badge badge-neutral">Sust. Officer</span>
+        <div className="px-6 pt-6 border-t border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded bg-emerald-500/20 flex items-center justify-center">
+              <span className="material-symbols-outlined text-emerald-400 text-sm">corporate_fare</span>
+            </div>
+            <div>
+              <p className="text-xs font-bold text-white leading-tight">North Campus</p>
+              <p className="text-[10px] text-slate-500 uppercase tracking-tighter">Instance #402</p>
             </div>
           </div>
         </div>
       </aside>
 
-      {/* MOBILE BOTTOM NAV */}
-      <nav className="mobile-nav">
-        {navItems.slice(0, 4).map((item) => (
-          <Link 
-            key={item.path} 
-            href={item.path}
-            className={`mobile-nav-item ${pathname === item.path ? 'active' : ''}`}
-          >
-            <span className="material-symbols-outlined">{item.icon}</span>
-            <span className="mobile-nav-label">{item.label}</span>
-          </Link>
-        ))}
-        <Link 
-          href="/dashboard/settings"
-          className={`mobile-nav-item ${pathname === '/dashboard/settings' ? 'active' : ''}`}
-        >
-          <span className="material-symbols-outlined">person</span>
-          <span className="mobile-nav-label">Profile</span>
-        </Link>
-      </nav>
-
-      {/* MAIN CONTENT */}
-      <main className="main-content">
+      {/* MAIN CONTENT AREA */}
+      <main className="flex-1 md:ml-64 min-h-screen pb-24 md:pb-8 flex flex-col overflow-x-hidden">
         {children}
         
-        {/* MOBILE FAB */}
-        <div className="mobile-fab">
-          <span className="material-symbols-outlined">add</span>
-        </div>
+        {/* Contextual Floating Action Button */}
+        <button className="fixed bottom-20 right-6 md:bottom-10 md:right-10 w-14 h-14 bg-emerald-600 text-white rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-40 group">
+          <span className="material-symbols-outlined text-2xl">add</span>
+          <span className="absolute right-full mr-4 px-3 py-1 bg-slate-800 text-white text-[10px] font-bold uppercase tracking-widest rounded opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none transition-opacity">Manual Log</span>
+        </button>
       </main>
 
-      <style jsx>{`
-        .dashboard-layout {
-          display: flex;
-          min-height: 100vh;
-          background-color: var(--color-cloud-100);
-        }
-        
-        .sidebar {
-          display: none;
-          width: 240px;
-          background-color: var(--color-ink);
-          color: var(--color-white);
-          flex-direction: column;
-          justify-content: space-between;
-          position: sticky;
-          top: 0;
-          height: 100vh;
-        }
-        
-        @media (min-width: 1024px) {
-          .sidebar {
-            display: flex;
-          }
-        }
-        
-        .sidebar-top {
-          padding: var(--space-6);
-        }
-        
-        .logo-container {
-          display: flex;
-          align-items: center;
-          gap: var(--space-2);
-          margin-bottom: var(--space-8);
-        }
-        
-        .logo-dot {
-          width: 12px;
-          height: 12px;
-          background-color: var(--color-emerald-600);
-          border-radius: 50%;
-        }
-        
-        .logo-text {
-          font-weight: 600;
-          font-size: 14px;
-        }
-        
-        .sidebar-nav {
-          display: flex;
-          flex-direction: column;
-          gap: var(--space-2);
-        }
-        
-        .nav-item {
-          display: flex;
-          align-items: center;
-          gap: var(--space-3);
-          height: 48px;
-          padding: 0 var(--space-3);
-          border-left: 3px solid transparent;
-          border-radius: 0 var(--radius-md) var(--radius-md) 0;
-          color: var(--color-mist-500);
-          text-decoration: none;
-          transition: all 150ms ease;
-        }
-        
-        .nav-icon-wrapper {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 24px;
-          height: 24px;
-        }
-        
-        .nav-item .material-symbols-outlined {
-          font-size: 24px;
-          line-height: 1;
-        }
-        
-        .nav-label {
-          font-weight: 500;
-          font-size: 15px;
-          line-height: 1;
-          transform: translateY(1px); /* Optical vertical alignment fix */
-        }
-        
-        .nav-item:hover {
-          background-color: rgba(255,255,255,0.05);
-          color: var(--color-white);
-        }
-        
-        .nav-item.active {
-          background-color: rgba(255,255,255,0.08);
-          color: var(--color-white);
-          border-left-color: var(--color-emerald-600);
-        }
-        
-        .nav-divider {
-          height: 1px;
-          background-color: rgba(255,255,255,0.08);
-          margin: var(--space-4) 0;
-        }
-        
-        .sidebar-bottom {
-          padding: var(--space-6);
-          border-top: 1px solid rgba(255,255,255,0.08);
-        }
-        
-        .user-profile {
-          display: flex;
-          align-items: center;
-          gap: var(--space-3);
-        }
-        
-        .avatar {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background-color: var(--color-emerald-600);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: bold;
-        }
-        
-        .user-info {
-          display: flex;
-          flex-direction: column;
-        }
-        
-        .user-name {
-          font-size: 14px;
-          font-weight: 600;
-        }
-        
-        .user-role {
-          font-size: 10px;
-          margin-top: 2px;
-          background-color: rgba(110, 231, 183, 0.2);
-          color: var(--color-mint-300);
-        }
-        
-        .main-content {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          padding-bottom: 80px; /* Space for mobile nav */
-          width: 100%;
-          overflow-x: hidden;
-        }
-        
-        @media (min-width: 1024px) {
-          .main-content {
-            padding-bottom: 0;
-          }
-        }
-        
-        .mobile-nav {
-          display: flex;
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 60px;
-          background-color: var(--color-white);
-          border-top: 1px solid #E5E7EB;
-          z-index: 50;
-          justify-content: space-around;
-          align-items: center;
-          padding-bottom: env(safe-area-inset-bottom);
-        }
-        
-        @media (min-width: 1024px) {
-          .mobile-nav {
-            display: none;
-          }
-        }
-        
-        .mobile-nav-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          color: var(--color-mist-500);
-          text-decoration: none;
-        }
-        
-        .mobile-nav-item.active {
-          color: var(--color-emerald-600);
-        }
-        
-        .mobile-nav-item.active .material-symbols-outlined {
-          font-variation-settings: 'FILL' 1;
-        }
-        
-        .mobile-nav-label {
-          font-size: 10px;
-          margin-top: 2px;
-          font-weight: 500;
-        }
-        
-        .mobile-fab {
-          position: fixed;
-          bottom: 80px;
-          right: 24px;
-          width: 56px;
-          height: 56px;
-          border-radius: 50%;
-          background-color: var(--color-emerald-600);
-          color: var(--color-white);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: var(--shadow-lg);
-          z-index: 40;
-        }
-        
-        @media (min-width: 1024px) {
-          .mobile-fab {
-            display: none;
-          }
-        }
-      `}</style>
+      {/* MOBILE BOTTOM NAV */}
+      <nav className="fixed md:hidden bottom-0 left-0 w-full z-50 h-16 flex justify-around items-center px-4 bg-white/90 backdrop-blur-lg border-t border-slate-200 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+        {mobileNavItems.map((item) => {
+          const isActive = pathname === item.path;
+          return (
+            <Link 
+              key={item.path} 
+              href={item.path}
+              className={`flex flex-col items-center gap-1 transition-transform active:scale-100 scale-95 ${isActive ? 'text-emerald-600' : 'text-slate-400'}`}
+            >
+              <span className="material-symbols-outlined">{item.icon}</span>
+              <span className="font-mono text-[10px] uppercase font-bold">{item.label}</span>
+            </Link>
+          )
+        })}
+      </nav>
     </div>
   );
 }
