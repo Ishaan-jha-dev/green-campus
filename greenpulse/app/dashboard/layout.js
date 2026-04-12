@@ -149,14 +149,23 @@ export default function DashboardLayout({ children }) {
           display: flex;
           align-items: center;
           gap: var(--space-3);
-          height: 40px;
+          height: 44px;
           padding: 0 var(--space-3);
-          border-radius: var(--radius-md);
+          border-left: 3px solid transparent;
+          border-radius: 0 var(--radius-md) var(--radius-md) 0;
           color: var(--color-mist-500);
           text-decoration: none;
           font-weight: 500;
           font-size: 15px;
           transition: all 150ms ease;
+        }
+        
+        .nav-item .material-symbols-outlined {
+          font-size: 22px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
         }
         
         .nav-item:hover {
@@ -167,8 +176,7 @@ export default function DashboardLayout({ children }) {
         .nav-item.active {
           background-color: rgba(255,255,255,0.08);
           color: var(--color-white);
-          border-left: 3px solid var(--color-emerald-600);
-          border-radius: 0 var(--radius-md) var(--radius-md) 0;
+          border-left-color: var(--color-emerald-600);
         }
         
         .nav-divider {
