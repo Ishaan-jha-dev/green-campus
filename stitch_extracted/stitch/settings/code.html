@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings | GreenPulse Sovereign Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;0,900;1,400&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#27313c",
+                    "secondary-container": "#8a4cfc",
+                    "surface": "#f7f9ff",
+                    "on-tertiary-fixed": "#2f1500",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "surface-variant": "#d9e3f2",
+                    "primary-fixed": "#85f8c4",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#68dba9",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "tertiary": "#8d4b00",
+                    "on-secondary-container": "#fffbff",
+                    "primary-container": "#00855d",
+                    "tertiary-container": "#b15f00",
+                    "outline": "#6d7a72",
+                    "surface-container-highest": "#d9e3f2",
+                    "on-surface": "#121c27",
+                    "outline-variant": "#bccac0",
+                    "surface-bright": "#f7f9ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#f5fff7",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#d1dbe9",
+                    "primary-fixed-dim": "#68dba9",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "background": "#f7f9ff",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#25005a",
+                    "on-background": "#121c27",
+                    "inverse-on-surface": "#e8f1ff",
+                    "primary": "#006948",
+                    "surface-tint": "#006c4a",
+                    "on-surface-variant": "#3d4a42",
+                    "on-primary-fixed": "#002114",
+                    "surface-container-low": "#edf4ff",
+                    "secondary": "#712ae2",
+                    "on-primary-fixed-variant": "#005137",
+                    "surface-container": "#e5effd",
+                    "surface-container-high": "#dfe9f7",
+                    "secondary-fixed": "#eaddff",
+                    "tertiary-fixed": "#ffdcc3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["DM Sans", "sans-serif"],
+                    "body": ["DM Sans", "sans-serif"],
+                    "label": ["JetBrains Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'DM Sans', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Anchor -->
+<header class="flex justify-between items-center w-full px-6 h-16 sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl font-['DM_Sans'] font-medium">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">GreenPulse</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8 text-slate-500 dark:text-slate-400">
+<span class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors duration-200 cursor-pointer">Dashboard</span>
+<span class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors duration-200 cursor-pointer">Insights</span>
+<span class="text-emerald-600 dark:text-emerald-400 font-bold transition-colors duration-200 cursor-pointer border-b-2 border-emerald-600">Settings</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+<img alt="User profile avatar" data-alt="Professional user profile avatar in a clean studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApRUQz2N7a-TkflYJvQe3zhCXU5JyYVFC-x_ldeG-7PA1gjMr11pLIGhNpDoAM-a35dAfC7uUaGKldZHLTDkKcxGS248rTVXq7C7bGFJJ2isE73VYp8UniB-Q-ZBx_oWvzKMaEb8LHR5nV4H9yWinv_e2FEfMEjQhOvblqWOKyuGBS_P6zB0SiUiqUej8o2X9H6FS0EYhwP5Veyn4SMAVR6936Pv9L_49xIRoXDyMZ0smyJvvKS8rPQH7TtZFf2pU7lfBnovWqJ-nq"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-64px)]">
+<!-- Side Navigation Bar -->
+<aside class="flex flex-col h-full py-8 overflow-y-auto bg-[#0F1923] h-screen w-64 fixed left-0 top-0 z-50 font-['DM_Sans'] text-sm tracking-wide">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="bolt">bolt</span>
+</div>
+<div>
+<h1 class="text-lg font-black text-white leading-none">GreenPulse</h1>
+<p class="text-[10px] text-slate-400 uppercase tracking-[0.2em] mt-1">Sovereign Ledger</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-150" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-150" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="visibility">visibility</span>
+                    CarbonLens
+                </a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-150" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="recycling">recycling</span>
+                    WasteAI
+                </a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-150" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="bolt">bolt</span>
+                    EnergyRadar
+                </a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-150" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="description">description</span>
+                    Reports
+                </a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:bg-white/5 hover:text-white transition-all duration-150" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="leaderboard">leaderboard</span>
+                    Leaderboard
+                </a>
+<a class="flex items-center px-6 py-3 text-emerald-400 bg-emerald-500/10 border-l-4 border-emerald-500 transition-all duration-150" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="px-6 mt-auto">
+<div class="p-4 bg-white/5 rounded-xl border border-white/10">
+<p class="text-xs text-slate-500 mb-2">Campus Security</p>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+<span class="text-emerald-400 font-bold mono text-xs uppercase">Sovereign Node Active</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 p-8 bg-surface-container-low">
+<div class="max-w-6xl mx-auto">
+<header class="mb-10">
+<h2 class="text-3xl font-bold text-on-surface font-headline">Organization Settings</h2>
+<p class="text-on-surface-variant mt-1">Configure your campus environmental sovereignty and team permissions.</p>
+</header>
+<div class="grid grid-cols-12 gap-8">
+<!-- Internal Navigation -->
+<aside class="col-span-12 lg:col-span-3">
+<nav class="space-y-1">
+<a class="flex items-center px-4 py-2.5 bg-surface-container-lowest rounded-xl text-primary font-bold shadow-sm" href="#profile">
+                                Campus Profile
+                            </a>
+<a class="flex items-center px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors" href="#factors">
+                                Emission Factors
+                            </a>
+<a class="flex items-center px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors" href="#team">
+                                Team Members
+                            </a>
+<a class="flex items-center px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors" href="#privacy">
+                                Data &amp; Privacy
+                            </a>
+<a class="flex items-center px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors" href="#notifications">
+                                Notifications
+                            </a>
+</nav>
+</aside>
+<!-- Content Canvas -->
+<div class="col-span-12 lg:col-span-9 space-y-8">
+<!-- Campus Profile Section -->
+<section class="bg-surface-container-lowest rounded-xl overflow-hidden" id="profile">
+<div class="border-l-4 border-emerald-500 p-8">
+<div class="flex justify-between items-start mb-6">
+<h3 class="text-xl font-bold font-headline">Campus Profile</h3>
+<span class="text-[10px] mono uppercase text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Last Synced: 2023-10-24 09:12</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider">Campus Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary py-3 px-4 font-medium" type="text" value="GreenPulse Main Campus"/>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider">Regional Grid Factor</label>
+<div class="relative">
+<input class="w-full bg-primary-container/10 border-none rounded-lg text-primary font-bold mono py-3 px-4" readonly="" type="text" value="0.412 kg CO2e/kWh"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[10px] bg-primary-container text-white px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[12px]" data-icon="magic_button">magic_button</span>
+                                                AUTO-SYNCED
+                                            </div>
+</div>
+<p class="text-[11px] text-emerald-700 italic">Magic Callout: Based on your current GPS location (Norfolk, VA), we have automatically applied the PJM Dominion regional grid intensity factor.</p>
+</div>
+<div class="space-y-2 md:col-span-2">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider">Primary Sustainability Lead</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary py-3 px-4" type="email" value="lead@greenpulse.edu"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Team Members Section -->
+<section class="bg-surface-container-lowest rounded-xl overflow-hidden" id="team">
+<div class="p-8">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-bold font-headline">Team Members</h3>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
+                                        Invite Member
+                                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead class="bg-surface-container-highest">
+<tr>
+<th class="px-4 py-3 text-left text-xs mono text-on-surface-variant uppercase tracking-widest">Member</th>
+<th class="px-4 py-3 text-left text-xs mono text-on-surface-variant uppercase tracking-widest">Role</th>
+<th class="px-4 py-3 text-left text-xs mono text-on-surface-variant uppercase tracking-widest">Activity</th>
+<th class="px-4 py-3 text-right text-xs mono text-on-surface-variant uppercase tracking-widest">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-xs">EJ</div>
+<div>
+<div class="text-sm font-bold">Elena Jensen</div>
+<div class="text-xs text-on-surface-variant">e.jensen@greenpulse.edu</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter bg-emerald-100 text-emerald-700 border border-emerald-200">
+                                                        Emerald Admin
+                                                    </span>
+</td>
+<td class="px-4 py-4 text-xs mono text-on-surface-variant">
+                                                    Today, 14:22
+                                                </td>
+<td class="px-4 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary-fixed-variant font-bold text-xs">MK</div>
+<div>
+<div class="text-sm font-bold">Marcus Kaine</div>
+<div class="text-xs text-on-surface-variant">m.kaine@greenpulse.edu</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter bg-sky-100 text-sky-700 border border-sky-200">
+                                                        Sky Officer
+                                                    </span>
+</td>
+<td class="px-4 py-4 text-xs mono text-on-surface-variant">
+                                                    Yesterday, 09:05
+                                                </td>
+<td class="px-4 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Data & Privacy Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-secondary shadow-sm">
+<h4 class="font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="security">security</span>
+                                    Sensor Permissions
+                                </h4>
+<div class="space-y-6">
+<div class="flex items-center justify-between opacity-50">
+<div>
+<p class="text-sm font-bold">WasteAI Camera Data</p>
+<p class="text-xs text-on-surface-variant">Real-time bin contamination analysis</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] mono uppercase font-bold text-error">Locked OFF</span>
+<div class="w-10 h-5 bg-surface-container-high rounded-full relative">
+<div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-bold">Fleet GPS Tracking</p>
+<p class="text-xs text-on-surface-variant">Campus service vehicle optimization</p>
+</div>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-tertiary-container shadow-sm">
+<h4 class="font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="key">key</span>
+                                    Blockchain Export
+                                </h4>
+<p class="text-xs text-on-surface-variant mb-4">Export sovereign ledger data to decentralized registries for ESG compliance.</p>
+<button class="w-full py-2.5 rounded-lg border border-outline-variant text-on-surface font-bold text-sm hover:bg-surface-container-low transition-colors">
+                                    Manage Ledger Keys
+                                </button>
+</div>
+</div>
+<!-- Danger Zone -->
+<section class="border border-error/30 bg-error-container/10 p-8 rounded-xl">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-error/10 text-error rounded-xl">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div class="flex-1">
+<h3 class="text-lg font-bold text-error font-headline">The Red Line</h3>
+<p class="text-sm text-error/80 mt-1 mb-6">Actions taken here are irreversible. This will purge all audited historical data from the Sovereign Ledger.</p>
+<div class="flex flex-wrap gap-4">
+<button class="px-6 py-2.5 bg-error text-white font-bold rounded-xl hover:bg-red-700 transition-colors shadow-sm">
+                                            Purge Ledger History
+                                        </button>
+<button class="px-6 py-2.5 border border-error text-error font-bold rounded-xl hover:bg-error/5 transition-colors">
+                                            Deactivate Organization
+                                        </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- Footer Details -->
+<footer class="mt-16 pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] mono text-on-surface-variant uppercase tracking-widest">
+<div>GreenPulse Campus v4.9.2 // Build: 0x82f9A</div>
+<div class="flex gap-8">
+<a class="hover:text-primary transition-colors" href="#">System Health: 99.98%</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Protocol</a>
+<a class="hover:text-primary transition-colors" href="#">Ledger Audit</a>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

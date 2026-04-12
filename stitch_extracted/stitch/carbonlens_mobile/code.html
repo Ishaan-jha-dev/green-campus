@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GreenPulse - CarbonLens Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "tertiary": "#8d4b00",
+                    "surface-container-high": "#dfe9f7",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "surface-tint": "#006c4a",
+                    "surface-variant": "#d9e3f2",
+                    "inverse-on-surface": "#e8f1ff",
+                    "secondary-fixed": "#eaddff",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#ffdcc3",
+                    "on-tertiary-fixed": "#2f1500",
+                    "outline": "#6d7a72",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#bccac0",
+                    "primary-fixed-dim": "#68dba9",
+                    "on-surface": "#121c27",
+                    "inverse-surface": "#27313c",
+                    "secondary-container": "#8a4cfc",
+                    "background": "#f7f9ff",
+                    "on-error": "#ffffff",
+                    "primary-container": "#00855d",
+                    "surface-container-highest": "#d9e3f2",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#85f8c4",
+                    "tertiary-container": "#b15f00",
+                    "on-tertiary-container": "#fffbff",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "on-secondary-fixed": "#25005a",
+                    "inverse-primary": "#68dba9",
+                    "secondary": "#712ae2",
+                    "on-primary-container": "#f5fff7",
+                    "on-surface-variant": "#3d4a42",
+                    "on-secondary-container": "#fffbff",
+                    "on-primary-fixed-variant": "#005137",
+                    "on-background": "#121c27",
+                    "surface-bright": "#f7f9ff",
+                    "surface": "#f7f9ff",
+                    "primary": "#006948",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#d1dbe9",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#002114",
+                    "surface-container-low": "#edf4ff",
+                    "surface-container": "#e5effd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "sans": ["DM Sans", "sans-serif"],
+                    "mono": ["JetBrains Mono", "monospace"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'DM Sans', sans-serif; }
+        .data-number { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom range slider styling for Emerald identity */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #dfe9f7;
+            border-radius: 3px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #006948;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -9px;
+            box-shadow: 0 4px 12px rgba(0, 105, 72, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-emerald-50/80 dark:bg-slate-950/80 backdrop-blur-xl fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcY4Djff5vtnXNyYiziB7WRWPuzezQ3YK95ZGmQlQG2ZlfXQV6a8m9YIdRsWC5r8lEX-Fl5Dz2QawaZbmECPLCeenEOMYUAcN4hxS2dN_Q3xA7b4MYHr8ir6mwCBH4EXGwdIFwa4gYuFs-weDJUMgW3jwj1g1PQqx3QCozV_K7y_n7EMEfl-9_jTQnCbWkfSLaIcFH0aIAJ_Uotbjmnu81mFKes4xn9phRd8hz6nBxalC4wRafJ6zrBl45179zS2V1h_Twe1rbygSE"/>
+</div>
+<span class="text-xl font-bold tracking-tighter text-emerald-700 dark:text-emerald-400">GreenPulse</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-emerald-100/50 dark:hover:bg-slate-800 transition-colors active:scale-95 duration-150 text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<main class="pt-20 px-6 max-w-md mx-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-6 text-xs font-mono uppercase tracking-widest text-outline">
+<span class="hover:text-primary cursor-pointer">Dashboard</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface-variant font-bold">CarbonLens</span>
+</nav>
+<!-- Segmented Tab Navigation -->
+<div class="bg-surface-container-low rounded-xl p-1 flex mb-8">
+<button class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500">Scope 1</button>
+<button class="flex-1 py-2 text-xs font-bold rounded-lg transition-all bg-surface-container-lowest text-primary shadow-sm">Scope 2</button>
+<button class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500">Scope 3</button>
+<button class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500">History</button>
+</div>
+<!-- Scope 2 Content -->
+<section class="space-y-6">
+<!-- Hero Calculation Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative overflow-hidden border-l-4 border-primary shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h2 class="text-xs font-mono uppercase tracking-widest text-outline mb-1">Live CO2e Output</h2>
+<div class="flex items-baseline gap-2">
+<span class="data-number text-5xl font-extrabold text-on-surface tracking-tighter">1.42</span>
+<span class="data-number text-xl text-primary font-bold">tCO2e</span>
+</div>
+</div>
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="visibility">visibility</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-xs font-medium text-primary">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+<span>12% below regional baseline</span>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-9xl">energy_savings_leaf</span>
+</div>
+</div>
+<!-- Input Control Section -->
+<div class="bg-surface-container-low rounded-xl p-6 space-y-6">
+<div>
+<div class="flex justify-between items-center mb-4">
+<label class="text-sm font-bold text-on-surface">Energy Consumption</label>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1.5 rounded-lg">
+<span class="data-number text-lg font-bold">3,850</span>
+<span class="text-[10px] font-mono text-outline uppercase">kWh</span>
+</div>
+</div>
+<input class="mb-2" max="10000" min="0" type="range" value="3850"/>
+<div class="flex justify-between text-[10px] font-mono text-outline uppercase tracking-wider">
+<span>0 kWh</span>
+<span>10,000 kWh</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl">
+<span class="block text-[10px] font-mono text-outline uppercase mb-1">Factor</span>
+<span class="data-number text-sm font-bold text-on-surface">0.369 kg/kWh</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl">
+<span class="block text-[10px] font-mono text-outline uppercase mb-1">Reliability</span>
+<span class="data-number text-sm font-bold text-primary">98.4%</span>
+</div>
+</div>
+</div>
+<!-- Breakdown & Comparison -->
+<div class="space-y-4">
+<h3 class="text-xs font-mono uppercase tracking-widest text-outline px-2">National Comparison</h3>
+<div class="bg-surface-container-lowest rounded-xl p-5 space-y-4">
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-mono uppercase tracking-wider">
+<span>Your Campus</span>
+<span class="data-number font-bold">3.85 MWh</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-2/3"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-[11px] font-mono uppercase tracking-wider">
+<span>National Avg</span>
+<span class="data-number font-bold">5.12 MWh</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-surface-variant rounded-full w-4/5"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Offset Card CTA -->
+<div class="bg-secondary/5 border-l-4 border-secondary rounded-xl p-5 flex items-center justify-between">
+<div>
+<h4 class="text-sm font-bold text-on-surface mb-1 text-secondary">CCTS Offset Program</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Bridge your Scope 2 gap with verified credits.</p>
+</div>
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-lg text-xs font-bold active:scale-95 transition-transform">
+                    Explore
+                </button>
+</div>
+<!-- Footer Footnote -->
+<footer class="pt-4 pb-10 border-t border-surface-container-high">
+<p class="text-[10px] text-outline leading-tight font-sans">
+                    Data calculated using CEA (Carbon Emission Agency) 2024 regional grid factors. Baseline comparisons updated quarterly.
+                </p>
+</footer>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-t border-emerald-100 dark:border-emerald-900/30 shadow-[0_-8px_32px_rgba(0,0,0,0.06)]">
+<div class="flex justify-around items-center px-4 pb-6 pt-2 max-w-md mx-auto">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 py-2 px-4 hover:text-emerald-500 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-sans font-medium text-[10px] uppercase tracking-widest mt-1">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl py-2 px-4 active:opacity-80 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span class="font-sans font-medium text-[10px] uppercase tracking-widest mt-1">CarbonLens</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 py-2 px-4 hover:text-emerald-500 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="recycling">recycling</span>
+<span class="font-sans font-medium text-[10px] uppercase tracking-widest mt-1">WasteAI</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 py-2 px-4 hover:text-emerald-500 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-sans font-medium text-[10px] uppercase tracking-widest mt-1">EnergyRadar</span>
+</div>
+</div>
+</nav>
+<!-- Floating Action Button - Contextual for CarbonLens (Log Activity) -->
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+</button>
+</body></html>

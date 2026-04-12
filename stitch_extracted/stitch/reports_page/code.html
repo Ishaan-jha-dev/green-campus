@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports &amp; Compliance | GreenPulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;family=Space+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#27313c",
+                        "secondary-container": "#8a4cfc",
+                        "surface": "#f7f9ff",
+                        "on-tertiary-fixed": "#2f1500",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#fffbff",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "surface-variant": "#d9e3f2",
+                        "primary-fixed": "#85f8c4",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#68dba9",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "tertiary": "#8d4b00",
+                        "on-secondary-container": "#fffbff",
+                        "primary-container": "#00855d",
+                        "tertiary-container": "#b15f00",
+                        "outline": "#6d7a72",
+                        "surface-container-highest": "#d9e3f2",
+                        "on-surface": "#121c27",
+                        "outline-variant": "#bccac0",
+                        "surface-bright": "#f7f9ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#f5fff7",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d1dbe9",
+                        "primary-fixed-dim": "#68dba9",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "background": "#f7f9ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#25005a",
+                        "on-background": "#121c27",
+                        "inverse-on-surface": "#e8f1ff",
+                        "primary": "#006948",
+                        "surface-tint": "#006c4a",
+                        "on-surface-variant": "#3d4a42",
+                        "on-primary-fixed": "#002114",
+                        "surface-container-low": "#edf4ff",
+                        "secondary": "#712ae2",
+                        "on-primary-fixed-variant": "#005137",
+                        "surface-container": "#e5effd",
+                        "surface-container-high": "#dfe9f7",
+                        "secondary-fixed": "#eaddff",
+                        "tertiary-fixed": "#ffdcc3",
+                        "carbon": "#059669",
+                        "waste": "#7C3AED",
+                        "energy": "#D97706"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["DM Sans", "sans-serif"],
+                        "body": ["DM Sans", "sans-serif"],
+                        "label": ["JetBrains Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'DM Sans', sans-serif; }
+        .data-mono { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#0F1923] flex flex-col py-8 overflow-y-auto z-50 shadow-2xl">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<h1 class="text-lg font-black text-white leading-none">GreenPulse</h1>
+<p class="text-[10px] text-slate-500 font-label tracking-tighter uppercase mt-1">Sovereign Ledger</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 px-6 py-3 text-slate-400 font-['DM_Sans'] text-sm tracking-wide hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-4 px-6 py-3 text-slate-400 font-['DM_Sans'] text-sm tracking-wide hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">visibility</span> CarbonLens
+            </a>
+<a class="flex items-center gap-4 px-6 py-3 text-slate-400 font-['DM_Sans'] text-sm tracking-wide hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">recycling</span> WasteAI
+            </a>
+<a class="flex items-center gap-4 px-6 py-3 text-slate-400 font-['DM_Sans'] text-sm tracking-wide hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">bolt</span> EnergyRadar
+            </a>
+<a class="flex items-center gap-4 px-6 py-3 text-emerald-400 bg-emerald-500/10 border-l-4 border-emerald-500 font-['DM_Sans'] text-sm tracking-wide transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span> Reports
+            </a>
+<a class="flex items-center gap-4 px-6 py-3 text-slate-400 font-['DM_Sans'] text-sm tracking-wide hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">leaderboard</span> Leaderboard
+            </a>
+<a class="flex items-center gap-4 px-6 py-3 text-slate-400 font-['DM_Sans'] text-sm tracking-wide hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+<div class="mt-auto px-6 pt-6 border-t border-white/5">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a professional man in a business casual environment with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt4_h1Jd6TLgqd2O0DcmQuWH3jyi3X68ZjhgCKXPHNZwxqRUuTNkWedU8WzVtchnzMYXwbeasNNZmIZ_sdcXOl2Ix07TmccJ7r2yK7FB-fhX7bYumEey3xs_y7zgnIsCHtSGQXbJorbLmH0XPNJTnyR--cv-GvFgYcouVHj174iSX8Yn6BzzSA3S_aoRyqhgo_wASfp6ots_TUpji5oPL9VL-7wvfp5_p_edu4qAopheQCXOlubYEbCK5AD4jTlv1LDifnkvsWuC5N"/>
+<div>
+<p class="text-white text-sm font-bold">Admin Portal</p>
+<p class="text-slate-500 text-[10px] data-mono">ID: 882-GP-24</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="ml-64 min-h-screen relative pb-20">
+<!-- TopAppBar Anchor -->
+<header class="flex justify-between items-center w-full px-10 h-16 sticky top-0 z-40 bg-white/80 backdrop-blur-xl transition-colors duration-200">
+<div class="flex items-center gap-2">
+<span class="text-emerald-600 material-symbols-outlined">verified_user</span>
+<span class="font-['DM_Sans'] font-medium text-slate-500">Compliance Center</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm w-64 focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all" placeholder="Search audit trails..." type="text"/>
+</div>
+<button class="relative text-slate-500 hover:text-emerald-600 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
+</button>
+</div>
+</header>
+<div class="px-10 py-8">
+<!-- Header Section -->
+<div class="mb-10 flex justify-between items-end">
+<div>
+<h2 class="text-5xl font-black text-on-surface tracking-tight leading-none mb-4">Reports &amp; Compliance</h2>
+<p class="text-on-surface-variant max-w-xl font-body">Institutional-grade environmental reporting. All documents are generated with live ledger verification and are compliant with national regulatory frameworks.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-surface-container-high text-on-surface font-bold rounded-xl flex items-center gap-2 hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-lg">filter_list</span> Filter
+                    </button>
+<button class="px-6 py-3 bg-primary text-white font-bold rounded-xl flex items-center gap-2 shadow-[0_8px_24px_rgba(0,105,72,0.15)] hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-lg">add</span> Generate Custom Audit
+                    </button>
+</div>
+</div>
+<!-- 3-Column Report Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Report Card 1: CCTS -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative group transition-all border-2 border-dashed border-outline-variant/30 hover:border-emerald-500/50 hover:bg-surface-container-low overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">co2</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] data-mono font-bold rounded-full uppercase tracking-wider">Ready</span>
+<span class="text-[10px] text-slate-400 mt-2 data-mono uppercase tracking-tighter">Last synced: 2024.05.12</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-2 font-headline">CCTS Framework</h3>
+<p class="text-sm text-on-surface-variant mb-6 font-body leading-relaxed">Comprehensive Carbon Tracking System analysis for the current fiscal quarter. Scope 1, 2, and 3 emissions breakdown.</p>
+<div class="flex items-center justify-between pt-6 border-t border-slate-100">
+<span class="text-xs text-slate-500 data-mono">PDF • 4.2 MB</span>
+<button class="text-emerald-600 font-bold text-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-lg">download</span> Download PDF
+                        </button>
+</div>
+</div>
+<!-- Report Card 2: EPR Plastic -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative group transition-all border-2 border-dashed border-outline-variant/30 hover:border-violet-500/50 hover:bg-surface-container-low overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-violet-500"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 rounded-lg bg-violet-100 flex items-center justify-center text-violet-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-violet-100 text-violet-700 text-[10px] data-mono font-bold rounded-full uppercase tracking-wider">Ready</span>
+<span class="text-[10px] text-slate-400 mt-2 data-mono uppercase tracking-tighter">Last synced: 2024.05.14</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-2 font-headline">EPR Plastic Compliance</h3>
+<p class="text-sm text-on-surface-variant mb-6 font-body leading-relaxed">Extended Producer Responsibility report for plastic waste generation and recycling throughput verification.</p>
+<div class="flex items-center justify-between pt-6 border-t border-slate-100">
+<span class="text-xs text-slate-500 data-mono">PDF • 1.8 MB</span>
+<button class="text-violet-600 font-bold text-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-lg">download</span> Download PDF
+                        </button>
+</div>
+</div>
+<!-- Report Card 3: EPR Battery -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative group transition-all border-2 border-dashed border-outline-variant/30 hover:border-violet-500/50 hover:bg-surface-container-low overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-violet-400"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 rounded-lg bg-violet-50 flex items-center justify-center text-violet-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">battery_charging_full</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-amber-100 text-amber-700 text-[10px] data-mono font-bold rounded-full uppercase tracking-wider">Incomplete</span>
+<span class="text-[10px] text-slate-400 mt-2 data-mono uppercase tracking-tighter">Pending vendor data</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-2 font-headline">EPR Battery Audit</h3>
+<p class="text-sm text-on-surface-variant mb-6 font-body leading-relaxed">Hazardous waste management audit for UPS and device battery recycling cycles across campus clusters.</p>
+<div class="flex items-center justify-between pt-6 border-t border-slate-100 opacity-50">
+<span class="text-xs text-slate-500 data-mono">PDF • -- MB</span>
+<button class="text-slate-400 font-bold text-sm flex items-center gap-1 cursor-not-allowed">
+<span class="material-symbols-outlined text-lg">lock</span> Generation Locked
+                        </button>
+</div>
+</div>
+<!-- Report Card 4: Energy Anomaly -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative group transition-all border-2 border-dashed border-outline-variant/30 hover:border-amber-500/50 hover:bg-surface-container-low overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-amber-500"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 rounded-lg bg-amber-100 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] data-mono font-bold rounded-full uppercase tracking-wider">Ready</span>
+<span class="text-[10px] text-slate-400 mt-2 data-mono uppercase tracking-tighter">Last synced: 2024.05.10</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-2 font-headline">Energy Anomaly Log</h3>
+<p class="text-sm text-on-surface-variant mb-6 font-body leading-relaxed">Deep-dive analysis of irregular power consumption patterns in the North Wing Research Labs.</p>
+<div class="flex items-center justify-between pt-6 border-t border-slate-100">
+<span class="text-xs text-slate-500 data-mono">PDF • 12.4 MB</span>
+<button class="text-amber-600 font-bold text-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-lg">download</span> Download PDF
+                        </button>
+</div>
+</div>
+<!-- Report Card 5: NAAC 7.1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative group transition-all border-2 border-dashed border-outline-variant/30 hover:border-emerald-500/50 hover:bg-surface-container-low overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-700"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-800">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] data-mono font-bold rounded-full uppercase tracking-wider">Ready</span>
+<span class="text-[10px] text-slate-400 mt-2 data-mono uppercase tracking-tighter">Last synced: 2024.05.01</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-2 font-headline">NAAC 7.1 Institutional</h3>
+<p class="text-sm text-on-surface-variant mb-6 font-body leading-relaxed">Standardized accreditation report detailing institutional values and social responsibilities regarding nature.</p>
+<div class="flex items-center justify-between pt-6 border-t border-slate-100">
+<span class="text-xs text-slate-500 data-mono">PDF • 8.1 MB</span>
+<button class="text-emerald-700 font-bold text-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-lg">download</span> Download PDF
+                        </button>
+</div>
+</div>
+<!-- Report Card 6: Annual Green Campus -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative group transition-all border-2 border-dashed border-outline-variant/30 hover:border-slate-800 hover:bg-surface-container-low overflow-hidden">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-slate-800"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] data-mono font-bold rounded-full uppercase tracking-wider">Ready</span>
+<span class="text-[10px] text-slate-400 mt-2 data-mono uppercase tracking-tighter">Last synced: 2024.01.15</span>
+</div>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-2 font-headline">Annual Green Campus</h3>
+<p class="text-sm text-on-surface-variant mb-6 font-body leading-relaxed">The flagship comprehensive annual review of sustainability metrics across the entire 2023 academic year.</p>
+<div class="flex items-center justify-between pt-6 border-t border-slate-100">
+<span class="text-xs text-slate-500 data-mono">PDF • 34.5 MB</span>
+<button class="text-slate-800 font-bold text-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-lg">download</span> Download PDF
+                        </button>
+</div>
+</div>
+</div>
+<!-- Footer Compliance Note -->
+<div class="mt-16 bg-surface-container rounded-xl p-8 flex flex-col md:flex-row items-center gap-8 border-l-4 border-emerald-500">
+<div class="flex-1">
+<h4 class="text-lg font-bold text-on-surface flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-emerald-600">shield</span>
+                        Ledger Verification Active
+                    </h4>
+<p class="text-sm text-on-surface-variant font-body">All reports generated through the GreenPulse Sovereign Ledger are cryptographically signed. This ensures that the data points used (Carbon, Waste, Energy) cannot be altered post-facto, providing an immutable audit trail for external compliance bodies.</p>
+</div>
+<div class="flex gap-4">
+<div class="text-center px-4 py-2 bg-white rounded-lg shadow-sm">
+<p class="text-[10px] data-mono text-slate-400 uppercase">Uptime</p>
+<p class="text-lg font-bold data-mono text-emerald-600">99.98%</p>
+</div>
+<div class="text-center px-4 py-2 bg-white rounded-lg shadow-sm">
+<p class="text-[10px] data-mono text-slate-400 uppercase">Latency</p>
+<p class="text-lg font-bold data-mono text-emerald-600">14ms</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on desktop as per instructions but kept for JSON structure integrity) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 h-16 flex justify-around items-center px-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<a class="text-slate-400 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['JetBrains_Mono'] text-[10px] uppercase font-bold">Home</span>
+</a>
+<a class="text-slate-400 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['JetBrains_Mono'] text-[10px] uppercase font-bold">Carbon</span>
+</a>
+<a class="text-slate-400 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">delete_outline</span>
+<span class="font-['JetBrains_Mono'] text-[10px] uppercase font-bold">Waste</span>
+</a>
+<a class="text-slate-400 flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined">electric_bolt</span>
+<span class="font-['JetBrains_Mono'] text-[10px] uppercase font-bold">Energy</span>
+</a>
+</nav>
+</body></html>

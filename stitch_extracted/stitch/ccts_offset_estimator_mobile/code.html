@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLens | CCTS Offset Estimator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Space+Grotesk:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#68dba9",
+                        "on-tertiary-container": "#fffbff",
+                        "on-surface": "#121c27",
+                        "surface-tint": "#006c4a",
+                        "surface-dim": "#d1dbe9",
+                        "on-background": "#121c27",
+                        "primary-fixed": "#85f8c4",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#00855d",
+                        "on-surface-variant": "#3d4a42",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#2f1500",
+                        "on-secondary-fixed": "#25005a",
+                        "outline": "#6d7a72",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary": "#712ae2",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "outline-variant": "#bccac0",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-primary-fixed-variant": "#005137",
+                        "surface-bright": "#f7f9ff",
+                        "error": "#ba1a1a",
+                        "surface-container": "#e5effd",
+                        "on-primary-fixed": "#002114",
+                        "inverse-on-surface": "#e8f1ff",
+                        "tertiary-container": "#b15f00",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "secondary-container": "#8a4cfc",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#27313c",
+                        "inverse-primary": "#68dba9",
+                        "background": "#f7f9ff",
+                        "surface-container-low": "#edf4ff",
+                        "surface": "#f7f9ff",
+                        "surface-variant": "#d9e3f2",
+                        "tertiary-fixed": "#ffdcc3",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "secondary-fixed": "#eaddff",
+                        "on-secondary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#dfe9f7",
+                        "on-primary-container": "#f5fff7",
+                        "surface-container-highest": "#d9e3f2",
+                        "tertiary": "#8d4b00",
+                        "primary": "#006948"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["DM Sans", "sans-serif"],
+                        "body": ["DM Sans", "sans-serif"],
+                        "label": ["JetBrains Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'DM Sans', sans-serif; }
+        .data-font { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-low text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-[#edf4ff] dark:bg-[#121c27] flex items-center justify-between px-6 py-4 w-full shadow-[0_8px_32px_rgba(18,28,39,0.06)] fixed top-0 z-50">
+<div class="flex flex-col">
+<span class="font-['DM_Sans'] font-bold text-[#059669] text-xl tracking-tight">GreenPulse</span>
+<nav class="flex items-center gap-1 mt-0.5">
+<span class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Dashboard</span>
+<span class="material-symbols-outlined text-[10px] text-slate-400">chevron_right</span>
+<span class="text-[10px] uppercase tracking-widest text-[#059669] font-bold">CarbonLens</span>
+</nav>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="professional male profile portrait with clean lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_FCrt_W-XnZh78CTcG2C_G1Hes-ZIScVn6BUaSF5Tm1XC5PB7d8wssz5PwaR4b2DDR5D1zvOcPy9zH-h7rlAMsGe3tN1iiAaH5bqFa9e-IehprvKHggyvatqiIO8qc5sGN_d-6AZ9qerVXb4J4SBaHNHIDUdl3e-yJ_RGVi_Q0Og5qYhwiztqoAfyGS3wYn3dQokfvTkbr3w2gvtgbgKXVcrnTp-eiiR6VgJLmNUfktk0GWeZTNrlLQP9EfCQ3VR3hpco9jc8id8k"/>
+</div>
+</header>
+<main class="pt-24 px-4 max-w-lg mx-auto">
+<!-- Page Title & Module Tabs -->
+<div class="mb-6">
+<h1 class="text-2xl font-bold text-on-surface mb-4">CCTS Offset Estimator</h1>
+<div class="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide">
+<button class="whitespace-nowrap px-1 py-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors">Scope 2</button>
+<button class="whitespace-nowrap px-1 py-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors">Scope 3</button>
+<button class="whitespace-nowrap px-1 py-2 text-sm font-bold text-[#059669] border-b-2 border-[#059669]">CCTS Offset</button>
+<button class="whitespace-nowrap px-1 py-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors">History</button>
+</div>
+</div>
+<!-- Stat Summary Row -->
+<div class="grid grid-cols-2 gap-3 mb-6">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-[#059669]">
+<p class="text-[10px] font-['JetBrains_Mono'] text-slate-500 uppercase tracking-tighter mb-1">Total CO2e</p>
+<p class="text-xl data-font font-bold">12.4 <span class="text-xs font-normal text-slate-400">t</span></p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-[#059669]">
+<p class="text-[10px] font-['JetBrains_Mono'] text-slate-500 uppercase tracking-tighter mb-1">CCCs Needed</p>
+<p class="text-xl data-font font-bold">149</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-slate-300">
+<p class="text-[10px] font-['JetBrains_Mono'] text-slate-500 uppercase tracking-tighter mb-1">Est. Cost</p>
+<p class="text-xl data-font font-bold">₹96,850</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border-l-4 border-primary">
+<p class="text-[10px] font-['JetBrains_Mono'] text-slate-500 uppercase tracking-tighter mb-1">vs Last Year</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">arrow_downward</span>
+<p class="text-xl data-font font-bold text-primary">4.2%</p>
+</div>
+</div>
+</div>
+<!-- Main Estimator Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 mb-6 shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-sm font-bold text-on-surface">Compliance Benchmark</h3>
+<p class="text-xs text-slate-500 mt-1">Based on 12.4 tCO2e intensity</p>
+</div>
+<span class="text-[10px] data-font bg-surface-container-high px-2 py-1 rounded">2024 V.2</span>
+</div>
+<!-- Comparison Bar -->
+<div class="space-y-6 mb-8">
+<div class="relative pt-6">
+<div class="flex justify-between text-[10px] data-font uppercase tracking-widest text-slate-400 mb-2">
+<span>Min</span>
+<span>BEE Benchmark</span>
+<span>Max</span>
+</div>
+<div class="h-4 w-full bg-surface-container-high rounded-full overflow-hidden relative">
+<!-- Benchmark Line -->
+<div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-on-surface z-10"></div>
+<!-- Actual Value Fill -->
+<div class="h-full bg-[#059669] rounded-full" style="width: 72%;"></div>
+</div>
+<!-- Marker -->
+<div class="absolute top-10 left-[72%] -translate-x-1/2 flex flex-col items-center">
+<div class="w-0.5 h-2 bg-[#059669]"></div>
+<span class="text-[10px] data-font font-bold text-[#059669] mt-1">YOUR CAMPUS</span>
+</div>
+</div>
+</div>
+<!-- Calculation Box -->
+<div class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-4 mb-6">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-[#059669]">calculate</span>
+<span class="text-xs font-bold uppercase tracking-tight">Financial Commitment</span>
+</div>
+<div class="flex items-baseline justify-between">
+<p class="data-font text-sm text-slate-600">149 CCCs × ₹650</p>
+<p class="data-font text-xl font-bold text-on-surface">₹96,850<span class="text-[10px] text-slate-400 font-normal ml-1">/year</span></p>
+</div>
+</div>
+<!-- Reduction Scenario Slider -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<h4 class="text-xs font-bold text-on-surface uppercase tracking-wider">Reduction Scenario</h4>
+<span class="data-font text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">15% Reduction</span>
+</div>
+<div class="px-2">
+<input class="w-full h-1.5 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-[#059669]" max="50" min="0" type="range" value="15"/>
+</div>
+<div class="flex items-center justify-between p-3 bg-primary/5 rounded-lg border border-primary/10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">savings</span>
+<span class="text-xs font-medium">Potential Savings</span>
+</div>
+<span class="data-font text-sm font-bold text-primary">₹14,527.50</span>
+</div>
+</div>
+<p class="mt-6 text-[10px] text-slate-400 italic leading-relaxed">
+                * Indicative pricing based on current carbon market trends in the India CCTS framework. Actual settlement prices may vary at time of trading.
+            </p>
+</div>
+<!-- Call to Action -->
+<button class="w-full bg-[#006948] text-white py-4 rounded-xl font-bold text-sm tracking-wide shadow-lg active:scale-[0.98] transition-transform mb-8">
+            RESERVE OFFSET CREDITS
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white/80 backdrop-blur-xl border-t border-[#dfe9f7] dark:border-[#1e293b]">
+<div class="flex flex-col items-center justify-center text-slate-400 pt-2 transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['DM_Sans'] font-bold text-[10px] uppercase tracking-widest mt-1">Overview</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#059669] border-t-2 border-[#059669] pt-2 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">filter_center_focus</span>
+<span class="font-['DM_Sans'] font-bold text-[10px] uppercase tracking-widest mt-1">CarbonLens</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 pt-2 transition-all">
+<span class="material-symbols-outlined">delete_outline</span>
+<span class="font-['DM_Sans'] font-bold text-[10px] uppercase tracking-widest mt-1">WasteAI</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 pt-2 transition-all">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-['DM_Sans'] font-bold text-[10px] uppercase tracking-widest mt-1">EnergyRadar</span>
+</div>
+</nav>
+</body></html>

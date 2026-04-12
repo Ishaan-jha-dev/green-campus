@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLens - Scope 3 Emissions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Manrope:wght@200..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#edf4ff",
+                        "surface-container": "#e5effd",
+                        "surface-dim": "#d1dbe9",
+                        "surface-bright": "#f7f9ff",
+                        "surface": "#f7f9ff",
+                        "primary": "#006948",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#002114",
+                        "on-surface-variant": "#3d4a42",
+                        "on-secondary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#005137",
+                        "on-background": "#121c27",
+                        "on-secondary-fixed": "#25005a",
+                        "inverse-primary": "#68dba9",
+                        "secondary": "#712ae2",
+                        "on-primary-container": "#f5fff7",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary-container": "#b15f00",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#d9e3f2",
+                        "primary-fixed": "#85f8c4",
+                        "on-error": "#ffffff",
+                        "primary-container": "#00855d",
+                        "primary-fixed-dim": "#68dba9",
+                        "on-surface": "#121c27",
+                        "secondary-container": "#8a4cfc",
+                        "background": "#f7f9ff",
+                        "inverse-surface": "#27313c",
+                        "outline-variant": "#bccac0",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6d7a72",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#2f1500",
+                        "tertiary-fixed": "#ffdcc3",
+                        "secondary-fixed": "#eaddff",
+                        "inverse-on-surface": "#e8f1ff",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#dfe9f7",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "surface-variant": "#d9e3f2",
+                        "surface-tint": "#006c4a",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "tertiary": "#8d4b00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["DM Sans", "sans-serif"],
+                        "body": ["DM Sans", "sans-serif"],
+                        "label": ["JetBrains Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'DM Sans', sans-serif; }
+        .data-text { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-[#f7f9ff] dark:bg-slate-950 shadow-[0_8px_32px_rgba(18,28,39,0.06)]">
+<div class="flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#059669] dark:text-[#10b981]" data-icon="analytics">analytics</span>
+<div class="flex flex-col">
+<span class="text-[10px] data-text uppercase tracking-widest text-slate-500">Dashboard / CarbonLens</span>
+<h1 class="text-xl font-bold text-[#059669] tracking-tighter">CarbonLens</h1>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="user profile" data-alt="close-up portrait of a professional corporate sustainability officer in a bright modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgv3dkAdfA76GgLklRbYxL4Nhaz55EtDyV3-JQNIJRk0hUsTPW0SIB-1kMRaXYmyFQY-twrsVbhaoldD7a-CG95xVZ9q5_-yq6xqYvXHLDNuS2m-S5h5TZgrLgiFO1u9FMzhfNIWtzkyxTFfgQDBZos757Qg8b1zhKYAYDEoQElZl7t2G64XM66MHLT54W6cSCFYnwlo4yDhl3uGG-UhziQyeSucL3HUSUGNOqM7t0SC-HJsJSYS5RTw2wL6iu_0hak1gEUQwgl6Ig"/>
+</div>
+</div>
+<div class="bg-[#dfe9f7] dark:bg-slate-800 h-[1px] w-full"></div>
+</header>
+<main class="px-4 py-6 space-y-6">
+<!-- Tabs Navigation -->
+<nav class="flex overflow-x-auto no-scrollbar gap-2 pb-2">
+<button class="px-4 py-2 text-sm font-medium whitespace-nowrap text-slate-500 hover:bg-[#edf4ff] transition-colors rounded-xl">Scope 2</button>
+<button class="px-4 py-2 text-sm font-bold whitespace-nowrap text-[#059669] bg-white border-b-2 border-[#059669] rounded-t-xl">Scope 3</button>
+<button class="px-4 py-2 text-sm font-medium whitespace-nowrap text-slate-500 hover:bg-[#edf4ff] transition-colors rounded-xl">CCTS Offset</button>
+<button class="px-4 py-2 text-sm font-medium whitespace-nowrap text-slate-500 hover:bg-[#edf4ff] transition-colors rounded-xl">History</button>
+</nav>
+<!-- Accordion Content -->
+<div class="space-y-4">
+<!-- 1. Commute Emissions -->
+<section class="bg-surface-container-lowest rounded-xl overflow-hidden border-l-4 border-[#059669] transition-all">
+<div class="p-4 flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="commute">commute</span>
+<div>
+<h3 class="font-bold text-on-surface">Commute Emissions</h3>
+<p class="text-[10px] data-text text-slate-500">LAST UPDATED: 2023-10-24</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400" data-icon="expand_more">expand_more</span>
+</div>
+<div class="px-4 pb-4 space-y-4">
+<div class="bg-surface-container-low p-3 rounded-xl">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-medium">Survey Completion</span>
+<span class="data-text text-xs font-bold text-primary">67%</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[67%] rounded-full"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 bg-surface-container-low rounded-xl">
+<span class="text-[10px] data-text text-slate-500 uppercase">Aggregated</span>
+<div class="data-text text-lg font-bold">124.5 <span class="text-[10px]">tCO2e</span></div>
+</div>
+<div class="p-3 bg-surface-container-low rounded-xl flex flex-col justify-center items-center text-primary cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
+<span class="text-[10px] font-bold mt-1">Invite more users</span>
+</div>
+</div>
+<!-- Stacked Bar Chart -->
+<div class="space-y-2">
+<span class="text-[10px] data-text text-slate-500 uppercase">Transport Mode Split</span>
+<div class="flex h-6 w-full rounded-lg overflow-hidden">
+<div class="bg-primary w-[45%] flex items-center justify-center text-[10px] text-white font-bold">Car</div>
+<div class="bg-primary-container w-[30%] flex items-center justify-center text-[10px] text-white font-bold">Bus</div>
+<div class="bg-inverse-primary w-[25%] flex items-center justify-center text-[10px] text-on-surface font-bold">Rail</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Canteen & Catering -->
+<section class="bg-surface-container-lowest rounded-xl overflow-hidden border-l-4 border-[#7C3AED]">
+<div class="p-4 flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#7C3AED]" data-icon="restaurant">restaurant</span>
+<div>
+<h3 class="font-bold text-on-surface">Canteen &amp; Catering</h3>
+<p class="text-[10px] data-text text-slate-500">LIVE COMPUTATION</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400" data-icon="expand_less">expand_less</span>
+</div>
+<div class="p-4 space-y-5">
+<div class="space-y-3">
+<div class="flex flex-col gap-1">
+<label class="text-[10px] data-text text-slate-500 uppercase">LPG Cylinders (19kg)</label>
+<input class="data-text w-full bg-surface-container rounded-xl border-none focus:ring-2 focus:ring-[#7C3AED] py-3 px-4" type="number" value="12"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[10px] data-text text-slate-500 uppercase">Generator Diesel (Liters)</label>
+<input class="data-text w-full bg-surface-container rounded-xl border-none focus:ring-2 focus:ring-[#7C3AED] py-3 px-4" type="number" value="450"/>
+</div>
+</div>
+<div class="bg-[#7C3AED]/10 p-4 rounded-xl flex justify-between items-center border border-[#7C3AED]/20">
+<div class="text-[10px] data-text text-[#7C3AED] font-bold">ESTIMATED IMPACT</div>
+<div class="data-text text-2xl font-bold text-[#7C3AED]">3.42 <span class="text-sm">tCO2e</span></div>
+</div>
+</div>
+</section>
+<!-- 3. Business Travel -->
+<section class="bg-surface-container-lowest rounded-xl overflow-hidden border-l-4 border-[#D97706]">
+<div class="p-4 flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#D97706]" data-icon="flight_takeoff">flight_takeoff</span>
+<div>
+<h3 class="font-bold text-on-surface">Business Travel</h3>
+<p class="text-[10px] data-text text-slate-500">FY 2023 LOGS</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-400" data-icon="expand_less">expand_less</span>
+</div>
+<div class="p-4 space-y-4">
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-highest">
+<th class="p-2 text-[10px] data-text text-on-surface uppercase">Dest</th>
+<th class="p-2 text-[10px] data-text text-on-surface uppercase">Mode</th>
+<th class="p-2 text-[10px] data-text text-on-surface uppercase text-right">CO2e</th>
+</tr>
+</thead>
+<tbody class="data-text text-[12px]">
+<tr class="border-b border-surface-container-high">
+<td class="p-2 font-medium">NYC</td>
+<td class="p-2 flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="flight">flight</span> Air</td>
+<td class="p-2 text-right font-bold">1.24</td>
+</tr>
+<tr class="border-b border-surface-container-high">
+<td class="p-2 font-medium">LON</td>
+<td class="p-2 flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="flight">flight</span> Air</td>
+<td class="p-2 text-right font-bold">0.86</td>
+</tr>
+<tr>
+<td class="p-2 font-medium">BER</td>
+<td class="p-2 flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="train">train</span> Rail</td>
+<td class="p-2 text-right font-bold">0.02</td>
+</tr>
+</tbody>
+</table>
+</div>
+<button class="w-full py-3 rounded-xl border border-dashed border-[#D97706] text-[#D97706] font-bold flex items-center justify-center gap-2 hover:bg-[#D97706]/5 transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                        Add Trip
+                    </button>
+</div>
+</section>
+<!-- 4. Procurement (Coming Soon) -->
+<section class="bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden border-l-4 border-slate-300 opacity-60">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400" data-icon="shopping_cart">shopping_cart</span>
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-slate-500">Procurement</h3>
+<span class="px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 text-[10px] data-text font-bold">PHASE 2</span>
+</div>
+</div>
+<div class="text-[10px] data-text text-slate-400 uppercase font-bold tracking-widest">Coming Soon</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-4 pb-safe bg-white/80 backdrop-blur-xl dark:bg-[#121c27]/80 border-t border-[#dfe9f7] dark:border-slate-800">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#059669] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="data-text text-[10px] uppercase tracking-widest mt-1">Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#059669] dark:text-[#10b981] relative after:content-[''] after:absolute after:bottom-[-8px] after:w-8 after:h-1 after:bg-[#059669] after:rounded-t-full" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="data-text text-[10px] uppercase tracking-widest mt-1">Scope 3</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#059669] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="data-text text-[10px] uppercase tracking-widest mt-1">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-[#059669] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="data-text text-[10px] uppercase tracking-widest mt-1">Settings</span>
+</a>
+</nav>
+</body></html>
