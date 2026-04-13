@@ -28,14 +28,11 @@ export default function LandingPage() {
         </div>
         
         <div className="hidden lg:flex items-center gap-10">
-          <Link href="/" className="text-emerald-700 hover:text-emerald-600 text-sm font-black transition-all border-b-2 border-emerald-600 py-1">Platform</Link>
-          <Link href="#" className="text-slate-500 hover:text-emerald-600 text-sm font-bold transition-all">Sustainability AI</Link>
-          <Link href="#" className="text-slate-500 hover:text-emerald-600 text-sm font-bold transition-all">Carbon Modeling</Link>
-          <Link href="#" className="text-slate-500 hover:text-emerald-600 text-sm font-bold transition-all">Energy Radar</Link>
+          <Link href="/" className="text-emerald-700 hover:text-emerald-600 text-sm font-black transition-all border-b-2 border-emerald-600 py-1 uppercase tracking-tighter">Audit Ecosystem</Link>
         </div>
 
-        <Link href="/login" className="px-8 py-3 text-sm font-black text-white bg-emerald-600 hover:bg-emerald-700 rounded-full transition-all shadow-xl shadow-emerald-600/30 uppercase tracking-tighter">
-          Campus Portal
+        <Link href="/login" className="px-10 py-4 text-xs font-black text-white bg-slate-900 hover:bg-emerald-600 rounded-full transition-all shadow-2xl shadow-black/10 uppercase tracking-[0.2em]">
+          Institutional Login
         </Link>
       </nav>
 
