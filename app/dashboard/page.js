@@ -16,7 +16,13 @@ import {
   FileSpreadsheet,
   Cpu,
   ArrowRight,
-  Scan
+  Scan,
+  Building2,
+  Sun,
+  Globe,
+  Settings,
+  ShieldAlert,
+  Download
 } from 'lucide-react';
 import {
   Chart as ChartJS,
