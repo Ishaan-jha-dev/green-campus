@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useState } from 'react';
 import AIAssistantWidget from '../../components/AIAssistantWidget';
 import { 
   Zap, 
@@ -17,11 +18,14 @@ import {
   Sparkles,
   Command,
   LayoutDashboard,
-  ShieldCheck
+  ShieldCheck,
+  Menu,
+  X
 } from 'lucide-react';
 
 export default function DashboardLayout({ children }) {
   const pathname = usePathname();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navItems = [
     { label: 'Campus Map', icon: <MapPin size={18} />, path: '/dashboard' },
@@ -34,9 +38,17 @@ export default function DashboardLayout({ children }) {
   return (
     <div className="flex h-screen bg-[#F3FBF6] text-slate-900 font-sans overflow-hidden selection:bg-emerald-500/30">
       
+      {/* MOBILE OVERLAY */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* SIDEBAR - GREENPULSE BRANDED */}
-      <aside className="w-[280px] bg-white flex flex-col h-full border-r border-emerald-100 shrink-0 relative z-20 shadow-[10px_0_30px_rgba(5,150,105,0.02)]">
-        <div className="h-24 flex items-center px-8 border-b border-slate-50">
+      <aside className={`fixed inset-y-0 left-0 w-[280px] bg-white flex flex-col h-full border-r border-emerald-100 shrink-0 z-50 shadow-[10px_0_30px_rgba(5,150,105,0.02)] transition-transform duration-300 lg:relative lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="h-24 flex items-center px-8 border-b border-slate-50 justify-between">
           <div className="flex items-center gap-3">
              <div className="w-11 h-11 rounded-2xl bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-600/20 transform -rotate-3 hover:rotate-0 transition-transform cursor-pointer">
                 <Leaf className="text-white w-6 h-6" />
@@ -46,6 +58,9 @@ export default function DashboardLayout({ children }) {
                <span className="text-emerald-500 text-[10px] uppercase font-black tracking-[0.2em] block mt-1 leading-none">Intelligence</span>
              </div>
           </div>
+          <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2 text-slate-400 hover:text-emerald-600">
+            <X size={20} />
+          </button>
         </div>
 
         <nav className="flex-1 px-4 py-10 space-y-1.5 overflow-y-auto no-scrollbar">
@@ -56,6 +71,7 @@ export default function DashboardLayout({ children }) {
               <Link 
                 key={item.path}
                 href={item.path}
+                onClick={() => setIsSidebarOpen(false)}
                 className={`flex items-center gap-4 px-5 h-12 rounded-2xl transition-all font-bold text-xs uppercase tracking-widest leading-none ${
                   isActive 
                     ? 'bg-emerald-600 text-white shadow-xl shadow-emerald-600/20' 
@@ -99,28 +115,45 @@ export default function DashboardLayout({ children }) {
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-50/50 blur-[120px] rounded-full pointer-events-none -z-10" />
 
         {/* TOP NAV VIEW */}
-        <header className="h-24 bg-white/50 backdrop-blur-2xl border-b border-emerald-900/5 flex items-center justify-between px-12 shrink-0 relative z-10">
-          <div className="max-w-md w-full relative">
+        <header className="h-20 lg:h-24 bg-white/50 backdrop-blur-2xl border-b border-emerald-900/5 flex items-center justify-between px-6 lg:px-12 shrink-0 relative z-30">
+          <div className="flex items-center gap-4 lg:hidden">
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="w-10 h-10 rounded-xl bg-white border border-emerald-100 flex items-center justify-center text-slate-600 shadow-sm"
+            >
+              <Menu size={20} />
+            </button>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center">
+                <Leaf className="text-white w-4 h-4" />
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden md:block max-w-md w-full relative">
             <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-emerald-600 transition-colors" size={18} />
             <input 
               type="text" 
               placeholder="Search campus analytics..." 
-              className="w-full h-14 bg-white/40 rounded-[24px] pl-14 pr-6 text-xs font-black text-slate-900 placeholder-slate-300 outline-none border-2 border-transparent focus:border-emerald-600/10 focus:bg-white transition-all shadow-sm"
+              className="w-full h-12 lg:h-14 bg-white/40 rounded-[20px] lg:rounded-[24px] pl-14 pr-6 text-xs font-black text-slate-900 placeholder-slate-300 outline-none border-2 border-transparent focus:border-emerald-600/10 focus:bg-white transition-all shadow-sm"
             />
           </div>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4 lg:gap-8">
+            <div className="md:hidden w-10 h-10 rounded-xl bg-white border border-emerald-100 flex items-center justify-center text-slate-600 shadow-sm">
+              <Search size={18} />
+            </div>
             <div className="flex items-center gap-4">
-               <div className="relative cursor-pointer w-14 h-14 rounded-[24px] bg-white border-2 border-emerald-50 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all shadow-sm group">
-                 <Bell size={20} className="text-slate-700 group-hover:text-white" />
-                 <span className="absolute top-4 right-4 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
+               <div className="relative cursor-pointer w-10 h-10 lg:w-14 lg:h-14 rounded-xl lg:rounded-[24px] bg-white border-2 border-emerald-50 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all shadow-sm group">
+                 <Bell size={18} className="text-slate-700 group-hover:text-white" />
+                 <span className="absolute top-2 right-2 lg:top-4 lg:right-4 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
                </div>
             </div>
           </div>
         </header>
 
         <main className="flex-1 overflow-y-auto relative z-0">
-           <div className="p-12">
+           <div className="p-6 lg:p-12">
               {children}
            </div>
         </main>
@@ -128,3 +161,4 @@ export default function DashboardLayout({ children }) {
     </div>
   );
 }
+
