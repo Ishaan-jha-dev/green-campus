@@ -27,7 +27,6 @@ export default function DashboardLayout({ children }) {
     { label: 'Campus Map', icon: <MapPin size={18} />, path: '/dashboard' },
     { label: 'Energy Radar', icon: <Zap size={18} />, path: '/dashboard/data' },
     { label: 'Carbon Ledger', icon: <Leaf size={18} />, path: '/dashboard/carbon' },
-    { label: 'Sustainability AI', icon: <Sparkles size={18} />, path: '/dashboard/suggestions' },
     { label: 'Reports Hub', icon: <BarChart3 size={18} />, path: '/dashboard/reports' },
     { label: 'Settings', icon: <Settings size={18} />, path: '/dashboard/settings' },
   ];
@@ -125,8 +124,6 @@ export default function DashboardLayout({ children }) {
               {children}
            </div>
         </main>
-        
-        <AIAssistantWidget />
       </div>
     </div>
   );

@@ -1,7 +1,34 @@
 'use client';
 
-import { useState } from 'react';
-import { Leaf, Award, Download, Calculator, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Leaf, Award, Download, Calculator, ArrowRight, BarChart, PieChart, Activity } from 'lucide-react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+} from 'chart.js';
+import { Bar, Doughnut } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 export default function CarbonCreditsPage() {
   const [calcParams, setCalcParams] = useState({
@@ -23,6 +50,26 @@ export default function CarbonCreditsPage() {
     calcParams.treesPlanted * 25.0
   ) / 1000).toFixed(2);
 
+  const doughnutData = {
+    labels: ['Solar', 'HVAC', 'Phantom', 'Manual', 'Trees'],
+    datasets: [{
+      data: [35, 25, 15, 15, 10],
+      backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#6366f1', '#14b8a6'],
+      borderWidth: 0,
+      hoverOffset: 20
+    }]
+  };
+
+  const barData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [{
+      label: 'Monthly CR Accumulation',
+      data: [4.2, 5.8, 4.9, 7.2, 8.5, 6.4],
+      backgroundColor: 'rgba(16, 185, 129, 0.8)',
+      borderRadius: 12,
+    }]
+  };
+
   return (
     <div className="p-8 max-w-[1200px] mx-auto space-y-10 font-sans">
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-slate-200 gap-4">
@@ -37,44 +84,65 @@ export default function CarbonCreditsPage() {
         </button>
       </header>
 
-      {/* Hero Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="col-span-2 bg-slate-900 border border-slate-800 rounded-3xl p-10 relative overflow-hidden shadow-2xl">
-           <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/20 blur-[100px] rounded-full" />
-           <p className="text-emerald-400 font-black uppercase tracking-[0.2em] text-[11px] mb-6">Total Banked Credits</p>
-           <div className="flex items-baseline gap-4 mb-3">
-             <h2 className="text-7xl font-black text-white tracking-tighter">45.20</h2>
-             <span className="text-2xl text-emerald-400 font-black">CR</span>
-           </div>
-           <p className="text-base text-slate-300 font-medium max-w-md mb-10 leading-relaxed">
-             Your total earned Carbon Credits through electricity decoupling and intelligent night optimizations.
-           </p>
-
-           <div className="flex gap-16 border-t border-slate-700 pt-8">
-              <div>
-                 <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Market Value Equivalency</p>
-                 <p className="text-2xl font-black text-white">₹ 94,500 <span className="text-sm text-slate-500 font-bold ml-1">INR</span></p>
+       {/* Hero Stats & Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-[40px] p-10 relative overflow-hidden shadow-2xl">
+           <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 blur-[100px] rounded-full" />
+           <div className="flex flex-col md:flex-row justify-between relative z-10 gap-10">
+              <div className="space-y-6">
+                <p className="text-emerald-400 font-black uppercase tracking-[0.2em] text-[11px]">Total Banked Credits</p>
+                <div className="flex items-baseline gap-4 mb-3">
+                  <h2 className="text-8xl font-black text-white tracking-tighter">45.20</h2>
+                  <span className="text-2xl text-emerald-400 font-black">CR</span>
+                </div>
+                <p className="text-base text-slate-400 font-medium max-w-sm leading-relaxed">
+                  Your total earned Carbon Credits through electricity decoupling and intelligent optimizations.
+                </p>
+                <div className="flex gap-10 border-t border-slate-800 pt-8">
+                  <div>
+                    <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Market Value</p>
+                    <p className="text-2xl font-black text-white">₹ 94,500</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Pending Sync</p>
+                    <p className="text-2xl font-black text-emerald-400">+12.4</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                 <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Pending Node Sync</p>
-                 <p className="text-2xl font-black text-emerald-400">+12.4 <span className="text-sm text-emerald-400/50 font-bold ml-1">CR</span></p>
+              
+              <div className="w-full md:w-64 h-64 shrink-0 flex items-center justify-center p-4 bg-white/5 rounded-[40px] border border-white/5">
+                <Doughnut 
+                  data={doughnutData} 
+                  options={{ 
+                    cutout: '75%', 
+                    plugins: { legend: { display: false } }, 
+                    maintainAspectRatio: false 
+                  }} 
+                />
+                <div className="absolute flex flex-col items-center">
+                  <PieChart className="text-emerald-500 w-6 h-6 mb-1 opacity-50" />
+                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Source</span>
+                </div>
               </div>
            </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-3xl p-8 flex flex-col justify-between shadow-xl shadow-slate-200/50">
-           <div>
-             <h3 className="text-slate-900 font-black text-xl mb-2">Certification Tier</h3>
-             <p className="text-slate-500 text-sm font-medium leading-relaxed">Reach <strong className="text-slate-800">100 CR</strong> to achieve the verified platinum institutional rating.</p>
-           </div>
-           
-           <div className="bg-slate-50 p-8 rounded-2xl border-2 border-slate-100 flex flex-col items-center justify-center relative overflow-hidden mt-6">
-              <Award className="w-16 h-16 text-yellow-500 mb-3" />
-              <p className="text-yellow-600 font-black text-xl">Platinum Rank</p>
-              <div className="w-full bg-slate-200 h-3 rounded-full overflow-hidden mt-6 shadow-inner border border-slate-300/50">
-                 <div className="bg-gradient-to-r from-yellow-500 to-yellow-300 h-full w-[45%]" />
+        <div className="lg:col-span-4 space-y-8">
+           <div className="bg-white border border-slate-200 rounded-[40px] p-8 h-full shadow-xl shadow-slate-200/40 relative overflow-hidden group">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-slate-900 font-black text-xl">Monthly Yield</h3>
+                <BarChart className="text-slate-200 group-hover:text-emerald-500 transition-colors" size={24} />
               </div>
-              <p className="text-[11px] font-black uppercase text-slate-400 mt-3 tracking-widest">45% there</p>
+              <div className="h-48">
+                <Bar 
+                  data={barData} 
+                  options={{ 
+                    plugins: { legend: { display: false } }, 
+                    maintainAspectRatio: false,
+                    scales: { y: { display: false }, x: { grid: { display: false }, ticks: { font: { weight: 'bold', size: 10 } } } }
+                  }} 
+                />
+              </div>
            </div>
         </div>
       </div>

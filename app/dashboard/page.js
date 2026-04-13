@@ -16,14 +16,31 @@ import {
   FileSpreadsheet,
   Cpu,
   ArrowRight,
-  Download,
-  Building2,
-  Sun,
-  Globe,
-  Settings,
-  ShieldAlert,
   Scan
 } from 'lucide-react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const INITIAL_ZONES = [
   { id: 'z1', name: 'Engineering Block', status: 'critical', pos: { top: '15%', left: '10%' }, usage: '+45%', w: 180, h: 120 },
@@ -59,6 +76,19 @@ export default function GreenPulseDashboard() {
     carbon: { value: "12.4", sub: "Annual Projection" },
     efficiency: { value: "88%", sub: "Institutional Avg" },
   });
+
+  const lineData = {
+    labels: ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM', '12AM'],
+    datasets: [{
+      label: 'Campus Load (MW)',
+      data: [120, 190, 248, 210, 180, 160, 130],
+      borderColor: '#10b981',
+      backgroundColor: 'rgba(16, 185, 129, 0.1)',
+      fill: true,
+      tension: 0.4,
+      pointRadius: 0
+    }]
+  };
   const [solarSlider, setSolarSlider] = useState(450);
 
   const [isUploading, setIsUploading] = useState(false);
@@ -104,9 +134,6 @@ export default function GreenPulseDashboard() {
       {/* HEADER SECTION - GreenPulse BRANDING */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
         <div className="space-y-4">
-           <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full font-black text-[10px] uppercase tracking-widest border border-emerald-200 italic">
-            <Scan size={14} /> Intelligence Node Active
-          </div>
           <h1 className="text-6xl font-black text-slate-900 tracking-tighter uppercase leading-none">
             Campus <br /> <span className="text-emerald-600">Operations Hub</span>
           </h1>
@@ -299,6 +326,57 @@ export default function GreenPulseDashboard() {
 
         </div>
       </div>
+      {/* AUDIT INTELLIGENCE TRENDS */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+         <div className="lg:col-span-8 bg-white p-10 rounded-[40px] border border-slate-100 shadow-xl shadow-emerald-600/5 relative overflow-hidden">
+            <div className="flex items-center justify-between mb-8">
+               <div>
+                  <h3 className="text-xl font-black text-slate-900 uppercase tracking-tighter">Energy Consumption Trend</h3>
+                  <p className="text-xs font-bold text-slate-400">Live Telemetry · 24 Hour Cycle</p>
+               </div>
+               <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[10px] font-black uppercase tracking-widest">
+                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Low Load
+                  </div>
+               </div>
+            </div>
+            <div className="h-[300px]">
+               <Line 
+                  data={lineData} 
+                  options={{ 
+                     maintainAspectRatio: false,
+                     plugins: { legend: { display: false } },
+                     scales: {
+                        y: { grid: { color: '#f8fafc' }, ticks: { font: { weight: 'bold', size: 10 } } },
+                        x: { grid: { display: false }, ticks: { font: { weight: 'bold', size: 10 } } }
+                     }
+                  }} 
+               />
+            </div>
+         </div>
+
+         <div className="lg:col-span-4 bg-emerald-600 p-10 rounded-[40px] text-white flex flex-col justify-between shadow-2xl shadow-emerald-600/30 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 blur-[60px] rounded-full group-hover:scale-150 transition-transform duration-1000" />
+            <div className="relative z-10">
+               <Activity className="w-10 h-10 mb-6 opacity-50" />
+               <h3 className="text-2xl font-black uppercase tracking-tighter mb-4">Grid Health <br /> Index</h3>
+               <p className="text-emerald-50/80 text-sm font-bold leading-relaxed">
+                  Your institutional grid is currently operating at <span className="text-white">Peak Efficiency</span> with zero detected anomalies in the last 6 hours.
+               </p>
+            </div>
+            <div className="pt-8 border-t border-white/10 mt-8">
+               <div className="flex justify-between items-end mb-2">
+                  <span className="text-[10px] font-black uppercase tracking-widest opacity-60">Uptime</span>
+                  <span className="text-2xl font-black">99.9%</span>
+               </div>
+               <div className="w-full bg-white/20 h-1 rounded-full overflow-hidden">
+                  <div className="bg-white h-full w-[99.9%]" />
+               </div>
+            </div>
+         </div>
+      </div>
+
     </div>
   );
 }
+
