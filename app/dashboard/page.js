@@ -83,7 +83,7 @@ export default function GreenPulseDashboard() {
     efficiency: { value: "88%", sub: "Institutional Avg" },
   });
 
-  const lineData = {
+  const [lineData, setLineData] = useState({
     labels: ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM', '12AM'],
     datasets: [{
       label: 'Campus Load (MW)',
@@ -94,7 +94,8 @@ export default function GreenPulseDashboard() {
       tension: 0.4,
       pointRadius: 0
     }]
-  };
+  });
+  
   const [solarSlider, setSolarSlider] = useState(450);
 
   const [isUploading, setIsUploading] = useState(false);
@@ -106,21 +107,88 @@ export default function GreenPulseDashboard() {
     const file = e.target.files[0];
     if (file) {
       setIsUploading(true);
-      setTimeout(() => {
-        setIsUploading(false);
-        setCsvData({ loaded: true });
+      const reader = new FileReader();
+      
+      reader.onload = (event) => {
+        const text = event.target.result;
+        const rows = text.split('\n').filter(row => row.trim() !== '');
+        const headers = rows[0].split(',').map(h => h.trim());
         
-        const newBuildingsParsed = [
-          { id: 'z7', name: 'Innovation Hub', status: 'critical', pos: { top: '55%', left: '75%' }, usage: '+85%', w: 180, h: 130 },
-        ];
-        
-        setZones(prev => [...prev, ...newBuildingsParsed]);
-        setKpiData({
-          gridLoad: { value: "312.8", sub: "Spike Detected" },
-          carbon: { value: "18.6", sub: "Recalculated" },
-          efficiency: { value: "72%", sub: "Action Required" },
+        const blockIdx = headers.indexOf('Block');
+        const consIdx = headers.indexOf('Units_Cons');
+        const timeIdx = headers.indexOf('Reading_Time');
+        const pfIdx = headers.indexOf('Power_Fac');
+        const peakIdx = headers.indexOf('Peak_Dem');
+
+        if (blockIdx === -1 || consIdx === -1) {
+          alert('Invalid CSV Format. Missing "Block" or "Units_Cons" columns.');
+          setIsUploading(false);
+          return;
+        }
+
+        const dataRows = rows.slice(1).map(row => {
+          const cols = row.split(',').map(c => c.trim());
+          return {
+            block: cols[blockIdx],
+            cons: parseFloat(cols[consIdx]) || 0,
+            time: cols[timeIdx] || '00:00:00',
+            pf: parseFloat(cols[pfIdx]) || 0.9,
+            peak: parseFloat(cols[peakIdx]) || 0
+          };
         });
-      }, 2000);
+
+        // 1. Update KPI Stats
+        const totalCons = dataRows.reduce((acc, r) => acc + r.cons, 0);
+        const avgPF = (dataRows.reduce((acc, r) => acc + r.pf, 0) / dataRows.length * 100).toFixed(0);
+        const avgPeak = (dataRows.reduce((acc, r) => acc + r.peak, 0) / dataRows.length).toFixed(1);
+
+        setKpiData({
+          gridLoad: { value: avgPeak, sub: "Dynamic Reading" },
+          carbon: { value: (totalCons / 1000).toFixed(1), sub: "Institutional Total" },
+          efficiency: { value: `${avgPF}%`, sub: "Grid Efficiency" },
+        });
+
+        // 2. Update Charts (Hourly Aggregation)
+        const hourlyMap = {};
+        dataRows.forEach(r => {
+          const hour = r.time.split(':')[0] + 'H';
+          hourlyMap[hour] = (hourlyMap[hour] || 0) + r.cons;
+        });
+        
+        const labels = Object.keys(hourlyMap).slice(0, 7);
+        const chartValues = labels.map(l => hourlyMap[l]);
+
+        setLineData(prev => ({
+          ...prev,
+          labels,
+          datasets: [{ ...prev.datasets[0], data: chartValues }]
+        }));
+
+        // 3. Update Audit Map (Zones)
+        const uniqueBlocks = [...new Set(dataRows.map(r => r.block))].slice(0, 8);
+        const newZones = uniqueBlocks.map((b, i) => {
+          const bData = dataRows.filter(r => r.block === b);
+          const bCons = bData.reduce((acc, r) => acc + r.cons, 0);
+          const top = 10 + (Math.floor(i / 3) * 25) + '%';
+          const left = 10 + ((i % 3) * 30) + '%';
+          
+          return {
+            id: `csv-${i}`,
+            name: b,
+            status: bCons > 5 ? 'critical' : 'stable',
+            pos: { top, left },
+            usage: `+${bCons.toFixed(1)}%`,
+            w: 160,
+            h: 110
+          };
+        });
+
+        setZones(newZones);
+        setCsvData({ loaded: true, count: dataRows.length });
+        setIsUploading(false);
+      };
+      
+      reader.readAsText(file);
     }
   };
 

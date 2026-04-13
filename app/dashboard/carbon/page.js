@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Leaf, Award, Download, Calculator, ArrowRight, BarChart, PieChart, Activity } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Leaf, Award, Download, Calculator, ArrowRight, BarChart, PieChart, Activity, Upload } from 'lucide-react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -50,7 +50,7 @@ export default function CarbonCreditsPage() {
     calcParams.treesPlanted * 25.0
   ) / 1000).toFixed(2);
 
-  const doughnutData = {
+  const [doughnutData, setDoughnutData] = useState({
     labels: ['Solar', 'HVAC', 'Phantom', 'Manual', 'Trees'],
     datasets: [{
       data: [35, 25, 15, 15, 10],
@@ -58,9 +58,9 @@ export default function CarbonCreditsPage() {
       borderWidth: 0,
       hoverOffset: 20
     }]
-  };
+  });
 
-  const barData = {
+  const [barData, setBarData] = useState({
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [{
       label: 'Monthly CR Accumulation',
@@ -68,6 +68,60 @@ export default function CarbonCreditsPage() {
       backgroundColor: 'rgba(16, 185, 129, 0.8)',
       borderRadius: 12,
     }]
+  });
+
+  const [csvStats, setCsvStats] = useState({ credits: "45.20", market: "94,500", pending: "+12.4" });
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setIsUploading(true);
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const text = event.target.result;
+        const rows = text.split('\n').filter(row => row.trim() !== '');
+        const headers = rows[0].split(',').map(h => h.trim());
+        
+        const blockIdx = headers.indexOf('Block');
+        const consIdx = headers.indexOf('Units_Cons');
+        
+        if (blockIdx === -1 || consIdx === -1) {
+          alert('Invalid CSV Format');
+          setIsUploading(false);
+          return;
+        }
+
+        const dataRows = rows.slice(1).map(row => {
+          const cols = row.split(',').map(c => c.trim());
+          return { block: cols[blockIdx], cons: parseFloat(cols[consIdx]) || 0 };
+        });
+
+        // 1. Update Aggregate Credits
+        const totalCredits = (dataRows.reduce((acc, r) => acc + r.cons, 0) * 0.45).toFixed(2);
+        const marketVal = (totalCredits * 2100).toLocaleString('en-IN');
+        setCsvStats({ credits: totalCredits, market: marketVal, pending: `+${(totalCredits * 0.1).toFixed(1)}` });
+
+        // 2. Update Doughnut Chart by Block
+        const blockMap = {};
+        dataRows.slice(0, 10).forEach(r => {
+          blockMap[r.block] = (blockMap[r.block] || 0) + r.cons;
+        });
+        
+        const labels = Object.keys(blockMap);
+        const values = labels.map(l => blockMap[l]);
+
+        setDoughnutData(prev => ({
+          ...prev,
+          labels,
+          datasets: [{ ...prev.datasets[0], data: values }]
+        }));
+
+        setIsUploading(false);
+      };
+      reader.readAsText(file);
+    }
   };
 
   return (
@@ -79,9 +133,19 @@ export default function CarbonCreditsPage() {
           </h1>
           <p className="text-slate-500 font-medium">Track, manage, and tokenize your verified energy offsets.</p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-xl transition-all shadow-xl shadow-emerald-500/30 font-bold text-sm shrink-0">
-           <Download className="w-5 h-5" /> Download Certificate
-        </button>
+          <div className="flex items-center gap-4">
+            <input type="file" ref={fileInputRef} onChange={handleFileUpload} accept=".csv" className="hidden" />
+            <button 
+              onClick={() => fileInputRef.current?.click()}
+              className="flex items-center gap-2 px-6 py-3.5 bg-white border-2 border-slate-100 hover:border-emerald-200 text-slate-700 rounded-xl transition-all font-black text-xs shrink-0"
+            >
+               {isUploading ? <Activity className="w-4 h-4 animate-spin text-emerald-500" /> : <Upload className="w-5 h-5 text-emerald-500" />}
+               {isUploading ? 'Parsing...' : 'Sync Data'}
+            </button>
+            <button className="flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-xl transition-all shadow-xl shadow-emerald-500/30 font-bold text-sm shrink-0">
+               <Download className="w-5 h-5" /> Download Certificate
+            </button>
+          </div>
       </header>
 
        {/* Hero Stats & Charts */}
@@ -92,7 +156,7 @@ export default function CarbonCreditsPage() {
               <div className="space-y-6">
                 <p className="text-emerald-400 font-black uppercase tracking-[0.2em] text-[11px]">Total Banked Credits</p>
                 <div className="flex items-baseline gap-4 mb-3">
-                  <h2 className="text-8xl font-black text-white tracking-tighter">45.20</h2>
+                  <h2 className="text-8xl font-black text-white tracking-tighter">{csvStats.credits}</h2>
                   <span className="text-2xl text-emerald-400 font-black">CR</span>
                 </div>
                 <p className="text-base text-slate-400 font-medium max-w-sm leading-relaxed">
@@ -101,11 +165,11 @@ export default function CarbonCreditsPage() {
                 <div className="flex gap-10 border-t border-slate-800 pt-8">
                   <div>
                     <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Market Value</p>
-                    <p className="text-2xl font-black text-white">₹ 94,500</p>
+                    <p className="text-2xl font-black text-white">₹ {csvStats.market}</p>
                   </div>
                   <div>
                     <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-2">Pending Sync</p>
-                    <p className="text-2xl font-black text-emerald-400">+12.4</p>
+                    <p className="text-2xl font-black text-emerald-400">{csvStats.pending}</p>
                   </div>
                 </div>
               </div>
