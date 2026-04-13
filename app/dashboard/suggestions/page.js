@@ -58,15 +58,6 @@ export default function SuggestionsPage() {
           </p>
         </div>
         
-        <div className="bg-emerald-900 p-8 rounded-[40px] text-white flex items-center gap-6 shadow-2xl shadow-emerald-900/10">
-           <div className="w-14 h-14 rounded-3xl bg-white/10 flex items-center justify-center backdrop-blur-md">
-              <Sparkles size={28} className="text-emerald-400" />
-           </div>
-           <div>
-              <p className="text-[10px] font-black uppercase text-emerald-400 tracking-widest mb-1">AI Reliability Score</p>
-              <p className="text-2xl font-black tracking-tighter">94.2% Verified</p>
-           </div>
-        </div>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -186,7 +177,7 @@ export default function SuggestionsPage() {
                   <div className="p-10 border-b border-slate-50 flex items-center justify-between bg-[#F3FBF6]/30">
                     <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">Strategic Audit Recommendations</h3>
                     <div className="flex items-center gap-2 px-4 py-1.5 bg-emerald-600 rounded-full text-[10px] font-black uppercase text-white tracking-widest">
-                       Verified AI
+                       GreenPulse AI
                     </div>
                   </div>
                   <div className="divide-y divide-slate-50">

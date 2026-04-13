@@ -78,15 +78,6 @@ export default function LandingPage() {
             <p className="text-xl text-emerald-50/80 max-w-2xl mx-auto font-bold tracking-tight leading-relaxed">
               GreenPulse is the ultimate sustainability intelligence platform. Use visual AI to track emissions, audit energy waste, and automate institutional compliance.
             </p>
-
-            <div className="flex items-center justify-center gap-6">
-               <div className="flex -space-x-3">
-                  {[1,2,3,4].map(i => <div key={i} className="w-10 h-10 rounded-full border-2 border-emerald-800 bg-emerald-700 flex items-center justify-center text-[10px] font-bold text-white uppercase tracking-tighter overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="user" />
-                  </div>)}
-               </div>
-               <p className="text-emerald-100 text-sm font-black uppercase tracking-widest">Trusted by 50+ Top Indian Universities</p>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -130,7 +121,7 @@ export default function LandingPage() {
            </div>
            <div className="absolute -bottom-10 -left-10 bg-emerald-900 text-white p-8 rounded-[32px] shadow-2xl max-w-xs space-y-4 transform -rotate-3">
               <p className="text-xl font-black leading-tight">Reduced average campus energy waste by 22% in the first quarter.</p>
-              <p className="text-[10px] font-black uppercase text-emerald-400 tracking-widest leading-none">Verified Reporting · Q1 2026</p>
+              <p className="text-[10px] font-black uppercase text-emerald-400 tracking-widest leading-none">Institutional Audit · Q1 2026</p>
            </div>
         </div>
       </section>

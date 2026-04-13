@@ -84,8 +84,7 @@ export default function DashboardLayout({ children }) {
               <div className="min-w-0">
                 <p className="text-white text-xs font-black truncate uppercase tracking-tighter">Admin Central</p>
                 <div className="flex items-center gap-1 mt-0.5">
-                   <ShieldCheck size={10} className="text-emerald-400" />
-                   <span className="text-emerald-400/80 text-[8px] uppercase font-black tracking-widest block">Level 4 Clearance</span>
+                   <span className="text-emerald-400/80 text-[8px] uppercase font-black tracking-widest block">Institutional Access</span>
                 </div>
               </div>
               <LogOut size={16} className="text-white/20 ml-auto group-hover:text-rose-400 transition-colors" />
@@ -112,11 +111,6 @@ export default function DashboardLayout({ children }) {
           </div>
 
           <div className="flex items-center gap-8">
-            <div className="hidden sm:flex items-center bg-white rounded-full px-5 py-2 border-2 border-emerald-50 shadow-sm">
-               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 mr-3 animate-pulse"></span>
-               <span className="text-[11px] font-black text-slate-700 uppercase tracking-widest">Campus AQI · 42</span>
-            </div>
-            
             <div className="flex items-center gap-4">
                <div className="relative cursor-pointer w-14 h-14 rounded-[24px] bg-white border-2 border-emerald-50 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all shadow-sm group">
                  <Bell size={20} className="text-slate-700 group-hover:text-white" />

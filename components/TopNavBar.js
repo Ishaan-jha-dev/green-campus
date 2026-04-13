@@ -5,7 +5,7 @@ export default function TopNavBar() {
     <header className="header-nav">
       <div className="logo-container">
         <div className="logo-dot"></div>
-        <span className="logo-text">GenShakti Ecosystem</span>
+        <span className="logo-text">GreenPulse Campus</span>
       </div>
       <nav className="primary-nav">
         <Link href="/">Home</Link>

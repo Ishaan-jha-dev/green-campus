@@ -115,17 +115,6 @@ export default function GreenPulseDashboard() {
           </p>
         </div>
 
-        <div className="bg-white p-2 rounded-[32px] border-2 border-slate-50 shadow-xl flex gap-2">
-            <div className="flex -space-x-4 p-4">
-               {[1,2,3].map(i => <div key={i} className="w-12 h-12 rounded-2xl border-4 border-white bg-slate-100 overflow-hidden shadow-sm">
-                  <img src={`https://i.pravatar.cc/100?img=${i+40}`} alt="admin" />
-               </div>)}
-            </div>
-            <div className="pr-10 flex flex-col justify-center">
-               <span className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Authorized Peers</span>
-               <span className="text-slate-900 font-black text-xs uppercase tracking-tighter">3 Admins Live</span>
-            </div>
-        </div>
       </div>
 
       {/* KPI METRICS */}
@@ -134,7 +123,7 @@ export default function GreenPulseDashboard() {
           { title: "Campus Load", value: kpiData.gridLoad.value, unit: "MW", icon: Zap, color: "emerald", trend: "+12%" },
           { title: "Carbon Yield", value: kpiData.carbon.value, unit: "tCO2", icon: Leaf, color: "emerald", trend: "Recalc" },
           { title: "Grid Efficiency", value: kpiData.efficiency.value, unit: "Score", icon: Activity, color: "amber", trend: "Audit" },
-          { title: "Active Compliance", value: "A+", unit: "Tier", icon: Building2, color: "rose", trend: "Verified" },
+          { title: "Active Compliance", value: "A+", unit: "Tier", icon: Building2, color: "rose", trend: "Stage 1" },
         ].map((stat, idx) => (
           <motion.div 
             key={idx} 

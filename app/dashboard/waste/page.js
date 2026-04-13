@@ -230,7 +230,7 @@ export default function WasteAIPage() {
 
                  <div className="text-center space-y-2">
                     <p className="text-sm font-semibold text-slate-700">1,242 kg uncertified gap</p>
-                    <p className="text-mist-500 text-xs italic">Bridge with the GenShakti PRO partnership to reach 100%.</p>
+                    <p className="text-mist-500 text-xs italic">Bridge with the GreenPulse PRO partnership to reach 100%.</p>
                  </div>
 
                  <button className="btn-primary w-full !bg-waste !shadow-none gap-2">Download Plastic EPR Report</button>

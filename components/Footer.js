@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="col logo-col">
           <div className="logo-container">
             <div className="logo-dot"></div>
-            <span className="logo-text">GenShakti Ecosystem</span>
+            <span className="logo-text">GreenPulse Campus</span>
           </div>
           <p className="tagline text-mist text-body-sm mt-4">
             Making Indian campuses measurable. Built for compliance, designed for impact, driven by data.
@@ -32,7 +32,7 @@ export default function Footer() {
       
       <div className="footer-bottom">
         <div className="container flex justify-between items-center text-caption text-mist">
-          <span>© 2026 GenShakti Ecosystem · Privacy Policy</span>
+          <span>© 2026 GreenPulse Campus · Privacy Policy</span>
           <span>SYSTEM_STATUS: NOMINAL</span>
         </div>
       </div>
