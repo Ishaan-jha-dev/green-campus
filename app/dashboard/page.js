@@ -373,7 +373,8 @@ export default function GreenPulseDashboard() {
                 </div>
               ) : (
                 <div className="flex-1 flex flex-col items-center justify-center p-6 lg:p-10 text-center space-y-4 bg-slate-50/50 rounded-[32px] border-2 border-dashed border-slate-100 h-[200px] lg:h-auto">
-                   <MapPin className="text-slate-200" size={32} lg:size={48} />
+                   <MapPin className="text-slate-200 lg:hidden" size={32} />
+                   <MapPin className="text-slate-200 hidden lg:block" size={48} />
                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-loose">Select a campus node on the map to run intelligence diagnostics.</p>
                 </div>
               )}
